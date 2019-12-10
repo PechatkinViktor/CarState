@@ -39,6 +39,10 @@ public class PurchasesRepository {
         new DeleteAllPurchaseAsyncTask(mPurchaseDao).execute();
     }
 
+    public LiveData<List<Purchase>> getAllPurchases() {
+        return mAllPurchases;
+    }
+
     private static class InsertPurchaseAsyncTask extends AsyncTask<Purchase, Void, Void> {
 
         private PurchaseDao mPurchaseDao;
