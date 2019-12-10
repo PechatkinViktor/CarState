@@ -1,5 +1,6 @@
 package com.pechatkin.carstate.data.db.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface PurchaseDao {
 
     @Query("SELECT * FROM purchases_table")
-    List<Purchase> getAllPurchases();
+    LiveData<List<Purchase>> getAllPurchases();
 
     @Insert
     void insert(Purchase purchase);
