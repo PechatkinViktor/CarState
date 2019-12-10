@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
+import com.pechatkin.carstate.presentation.ui.utils.PurchaseDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,11 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
     }
 
     void setPurchases(List<Purchase> purchases) {
-        mPurchases = purchases;
+        PurchaseDiffCallback diffCallback = new PurchaseDiffCallback(mPurchases, purchases);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+        mPurchases.clear();
+        mPurchases.addAll(purchases);
+        diffResult.dispatchUpdatesTo(this);
         notifyDataSetChanged();
     }
 

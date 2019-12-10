@@ -22,6 +22,7 @@ import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.presentation.PurchasesViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasesFragment extends Fragment {
@@ -143,7 +144,13 @@ public class PurchasesFragment extends Fragment {
             mPurchasesViewModel.getAllPurchases().observe(this, new Observer<List<Purchase>>() {
                 @Override
                 public void onChanged(List<Purchase> purchases) {
-                    mPurchasesAdapter.setPurchases(purchases);
+                    List<Purchase> purchaseList = new ArrayList<>();
+                    for (Purchase purchase : purchases) {
+                        if(!purchase.isIsHistory()){
+                            purchaseList.add(purchase);
+                        }
+                    }
+                    mPurchasesAdapter.setPurchases(purchaseList);
                 }
             });
         }

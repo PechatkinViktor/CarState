@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:minWidth="@dimen/dialog_fragment_min_width"
-    android:minHeight="@dimen/dialog_fragment_min_height"
     android:padding="@dimen/padding_medium">
 
     <TextView
