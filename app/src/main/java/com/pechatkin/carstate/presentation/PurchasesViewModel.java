@@ -14,6 +14,7 @@ import java.util.List;
 public class PurchasesViewModel extends AndroidViewModel {
 
     private PurchasesRepository mPurchasesRepository;
+
     private LiveData<List<Purchase>> mAllPurchases;
 
     public PurchasesViewModel(@NonNull Application application) {
@@ -35,11 +36,11 @@ public class PurchasesViewModel extends AndroidViewModel {
         mPurchasesRepository.delete(purchase);
     }
 
-    public void deleteAllPurchases() {
-        mPurchasesRepository.deleteAllPurchases();
-    }
+    public void deleteAllPurchasesInPlanned() { mPurchasesRepository.deleteAllPurchases(); }
+
 
     public LiveData<List<Purchase>> getAllPurchases() {
         return mAllPurchases;
     }
+
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="@dimen/dialog_fragment_min_width"
+    android:minHeight="@dimen/dialog_fragment_min_height"
+    android:padding="@dimen/padding_medium">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/planned"
+        android:textStyle="italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginBottom="@dimen/margin_small"/>
+
+    <EditText
+        android:id="@+id/text_input_title_add_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/title"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/text_input_desc_add_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/desc"
+        tools:ignore="Autofill" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_category_add_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:entries="@array/menu_spinner_category" />
+
+    <EditText
+        android:id="@+id/text_input_prise_add_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:inputType="numberDecimal"
+        android:maxLength="15"
+        android:hint="@string/prise"
+        tools:ignore="Autofill" />
+
+    <Button
+        android:id="@+id/button_add_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:background="?colorAccent"
+        android:layout_margin="@dimen/margin_big"
+        android:text="@string/btn_add"/>
+
+</LinearLayout>

@@ -21,4 +21,18 @@
         android:id="@+id/navigation_settings"
         android:name="com.pechatkin.carstate.presentation.ui.settings.SettingsFragment"
         android:label="@string/app_settings" />
+    <fragment android:id="@+id/placeholder" >
+        <action
+            android:id="@+id/action_placeholder_to_navigation_history"
+            app:destination="@id/navigation_history" />
+        <action
+            android:id="@+id/action_placeholder_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_placeholder_to_navigation_purchases"
+            app:destination="@id/navigation_purchases" />
+        <action
+            android:id="@+id/action_placeholder_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+    </fragment>
 </navigation>

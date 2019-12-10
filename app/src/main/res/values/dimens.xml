@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">32dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="margin_big">32dp</dimen>
+    <dimen name="dialog_fragment_min_width">1000dp</dimen>
+    <dimen name="dialog_fragment_min_height">450dp</dimen>
+</resources>

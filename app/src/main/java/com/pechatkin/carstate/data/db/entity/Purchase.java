@@ -18,7 +18,7 @@ public class Purchase {
     private String mDescription;
 
     @ColumnInfo(name = "is_history")
-    private boolean mIsiHistory;
+    private boolean mIsHistory;
 
     @ColumnInfo(name = "add_purchases_date")
     private String mAddPurchasesDate;
@@ -35,19 +35,13 @@ public class Purchase {
     public Purchase(String title, String description, String addPurchasesDate, float prise, String category) {
         mTitle = title;
         mDescription = description;
-        mIsiHistory = false;
+        mIsHistory = false;
         mAddPurchasesDate = addPurchasesDate;
         mPrise = prise;
         mCategory = category;
     }
 
-    public void setId(long id) {
-        mId = id;
-    }
-
-    public long getId() {
-        return mId;
-    }
+    public long getId() { return mId; }
 
     public String getTitle() {
         return mTitle;
@@ -57,8 +51,8 @@ public class Purchase {
         return mDescription;
     }
 
-    public boolean isIsiHistory() {
-        return mIsiHistory;
+    public boolean isIsHistory() {
+        return mIsHistory;
     }
 
     public String getAddPurchasesDate() {
@@ -75,5 +69,17 @@ public class Purchase {
 
     public String getCategory() {
         return mCategory;
+    }
+
+    public void setId(long id) {
+        mId = id;
+    }
+
+    public void setIsHistory(boolean isHistory) {
+        mIsHistory = isHistory;
+    }
+
+    public void setAddHistoryDate(String addHistoryDate) {
+        mAddHistoryDate = addHistoryDate;
     }
 }

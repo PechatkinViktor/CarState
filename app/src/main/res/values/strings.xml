@@ -5,10 +5,26 @@
     <string name="bottom_navigation_history">История</string>
     <string name="bottom_navigation_purchases">Покупки</string>
     <string name="bottom_navigation_home">Главная</string>
+
     <string name="story_purchases">Итория покупок</string>
-    <string name="purchases">Покупки</string>
+    <string name="purchases">Планирование покупок</string>
     <string name="home">Главная</string>
     <string name="app_settings">Настройки приложения</string>
 
+    <string name="planned">Запланировать покупку</string>
+    <string name="title">Заголовок</string>
+    <string name="desc">Описание</string>
+    <string name="prise">Цена</string>
+    <string name="btn_add">Добавить</string>
+    <string name="delete_all_cards">Удалить все карточки</string>
+
+    <string-array name="menu_spinner_category">
+        <item>АВТОЗАПЧАСТИ</item>
+        <item>РАСХОДНИКИ</item>
+        <item>ИНСТРУМЕНТЫ</item>
+        <item>АКСЕССУАРЫ</item>
+        <item>ШИНЫ/ДИСКИ</item>
+        <item>ПРОЧЕЕ</item>
+    </string-array>
 
 </resources>
