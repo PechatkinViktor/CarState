@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@+id/navigation_home">
+
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.pechatkin.carstate.presentation.ui.history.HistoryFragment"
+        android:label="@string/story_purchases" />
+    <fragment
+        android:id="@+id/navigation_purchases"
+        android:name="com.pechatkin.carstate.presentation.ui.purchases.PurchasesFragment"
+        android:label="@string/purchases" />
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.pechatkin.carstate.presentation.ui.home.HomeFragment"
+        android:label="@string/home" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.pechatkin.carstate.presentation.ui.settings.SettingsFragment"
+        android:label="@string/app_settings" />
+</navigation>
