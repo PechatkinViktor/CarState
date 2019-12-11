@@ -28,7 +28,8 @@ public class PurchaseDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return mOldPurchase.get(oldItemPosition).getId() == mNewPurchase.get(newItemPosition).getId();
+        return mOldPurchase.get(oldItemPosition)
+                .getId() == mNewPurchase.get(newItemPosition).getId();
     }
 
     @Override

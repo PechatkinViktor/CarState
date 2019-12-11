@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface PurchaseDao {
 
-    @Query("SELECT * FROM purchases_table")
+    @Query("SELECT * FROM purchases_table ORDER BY id DESC")
     LiveData<List<Purchase>> getAllPurchases();
 
     @Insert

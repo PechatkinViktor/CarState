@@ -17,6 +17,8 @@
     <string name="prise">Цена</string>
     <string name="btn_add">Добавить</string>
     <string name="delete_all_cards">Удалить все карточки</string>
+    <string name="update_card">Обновить карточку</string>
+    <string name="update">Обновить</string>
 
     <string-array name="menu_spinner_category">
         <item>АВТОЗАПЧАСТИ</item>

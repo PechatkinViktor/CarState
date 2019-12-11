@@ -8,6 +8,7 @@
     android:padding="@dimen/padding_medium">
 
     <TextView
+        android:id="@+id/text_title_add_purchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/planned"

@@ -1,4 +1,4 @@
-package com.pechatkin.carstate.presentation.ui.purchases;
+package com.pechatkin.carstate.presentation.ui.history;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,56 +16,55 @@ import com.pechatkin.carstate.presentation.ui.utils.PurchaseDiffCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.PurchasesHolder> {
 
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryHolder>{
 
     private OnItemClickListener mClickListener;
-    private List<Purchase> mPurchases = new ArrayList<>();
+    private List<Purchase> mPurchasesInHistory = new ArrayList<>();
 
     @NonNull
     @Override
-    public PurchasesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_view_item, parent, false);
-        return new PurchasesHolder(view);
+        return new HistoryHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PurchasesHolder holder, int position) {
-        holder.bindView(mPurchases.get(position));
+    public void onBindViewHolder(@NonNull HistoryHolder holder, int position) {
+        holder.bindView(mPurchasesInHistory.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mPurchases.size();
+        return mPurchasesInHistory.size();
     }
 
     Purchase getPurchaseAt(int position) {
-        return mPurchases.get(position);
+        return mPurchasesInHistory.get(position);
     }
 
     void setPurchases(List<Purchase> purchases) {
-        PurchaseDiffCallback diffCallback = new PurchaseDiffCallback(mPurchases, purchases);
+        PurchaseDiffCallback diffCallback = new PurchaseDiffCallback(mPurchasesInHistory, purchases);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-        mPurchases.clear();
-        mPurchases.addAll(purchases);
+        mPurchasesInHistory.clear();
+        mPurchasesInHistory.addAll(purchases);
         diffResult.dispatchUpdatesTo(this);
     }
 
-
-    class PurchasesHolder extends RecyclerView.ViewHolder {
+    class HistoryHolder extends RecyclerView.ViewHolder {
 
         private final TextView mPurchaseTitle;
-        private final TextView mPurchaseDate;
+        private final TextView mPurchaseDateInHistory;
         private final TextView mPurchaseCategory;
         private final TextView mPurchaseDesc;
         private final TextView mPurchasePrise;
 
-        PurchasesHolder(@NonNull View itemView) {
+        HistoryHolder(@NonNull View itemView) {
             super(itemView);
 
             mPurchaseTitle = itemView.findViewById(R.id.text_view_purchases_title);
-            mPurchaseDate = itemView.findViewById(R.id.text_view_purchases_date);
+            mPurchaseDateInHistory = itemView.findViewById(R.id.text_view_purchases_date);
             mPurchaseCategory = itemView.findViewById(R.id.text_view_purchases_category);
             mPurchaseDesc = itemView.findViewById(R.id.text_view_purchases_desc);
             mPurchasePrise = itemView.findViewById(R.id.text_view_purchases_prise);
@@ -73,19 +72,20 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 if(mClickListener != null && position != RecyclerView.NO_POSITION) {
-                    mClickListener.onItemClick(mPurchases.get(position));
+                    mClickListener.onItemClick(mPurchasesInHistory.get(position));
                 }
             });
         }
 
-        private void bindView(Purchase purchase) {
+        void bindView(Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
-            mPurchaseDate.setText(purchase.getAddPurchasesDate());
+            mPurchaseDateInHistory.setText(purchase.getAddHistoryDate());
             mPurchaseCategory.setText(purchase.getCategory());
             mPurchaseDesc.setText(purchase.getDescription());
             mPurchasePrise.setText(String.valueOf(purchase.getPrise()));
         }
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(Purchase purchase);
