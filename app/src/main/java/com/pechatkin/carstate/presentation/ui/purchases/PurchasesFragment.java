@@ -110,7 +110,7 @@ public class PurchasesFragment extends Fragment {
                         viewHolder.getAdapterPosition());
                 updatedPurchase.setAddHistoryDate(new SimpleDateFormat(DATE_FORMAT_PATTERN)
                         .format(new Date()));
-                updatedPurchase.setIsHistory(!STATE_IS_HISTORY);
+                updatedPurchase.setIsHistory(STATE_IS_HISTORY);
                 mPurchasesViewModel.update(updatedPurchase);
                 mPurchasesAdapter.notifyItemRangeRemoved(viewHolder.getAdapterPosition(),
                         mPurchasesAdapter.getItemCount());

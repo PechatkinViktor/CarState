@@ -80,7 +80,7 @@ public class HistoryFragment extends Fragment {
 
     private void addSwipeListener() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(DRAG_DIRS,
-                ItemTouchHelper.LEFT ) {
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView,
                                   @NonNull RecyclerView.ViewHolder viewHolder,
