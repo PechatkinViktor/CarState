@@ -1,5 +1,6 @@
 package com.pechatkin.carstate.presentation.ui.history;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,28 +12,37 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
-import com.pechatkin.carstate.presentation.PurchasesViewModel;
-import com.pechatkin.carstate.presentation.ui.purchases.AddOrUpdatePurchaseFragment;
+import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
+import com.pechatkin.carstate.presentation.viewmodel.PurhaseViewModelFactory;
+
+import java.util.Date;
+
+import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_DELETE;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_SEND_TO_HISTORY;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.DRAG_DIRS;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.FRAGMENT_DIALOG_HISTORY;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_HISTORY;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.TOAST_DELETE_ALL;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.UNDO_TEXT;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.UPDATED_PURCHASE;
 
 public class HistoryFragment extends Fragment {
-
-    private static final String TOAST_DELETE_ALL = "Все карточки удалены";
-    private static final String TOAST_DELETE = "Запись удалена";
-    private static final int DRAG_DIRS = 0;
-    private static final String FRAGMENT_DIALOG = "fragment_dialog_history";
-    private static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
 
     private PurchasesViewModel mPurchasesViewModel;
     private RecyclerView mRecyclerView;
     private HistoryAdapter mHistoryAdapter;
+    private CoordinatorLayout mLayout;
 
     @Nullable
     @Override
@@ -80,17 +90,58 @@ public class HistoryFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                deletePurchase(viewHolder);
+                switch (direction) {
+                    case ItemTouchHelper.LEFT: {
+                        deletePurchase(viewHolder);
+                        break;
+                    }
+                    case ItemTouchHelper.RIGHT: {
+                        sendPurchaseToPlanned(viewHolder);
+                        break;
+                    }
+                }
+            }
+
+            private void sendPurchaseToPlanned(RecyclerView.ViewHolder viewHolder) {
+                Purchase updatedPurchase = mHistoryAdapter.getPurchaseAt(
+                        viewHolder.getAdapterPosition());
+                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(DATE_FORMAT_PATTERN)
+                        .format(new Date()));
+                updatedPurchase.setIsHistory(!STATE_IS_HISTORY);
+                mPurchasesViewModel.update(updatedPurchase);
+
+                undoSendToHistorySwipe(updatedPurchase);
             }
 
             private void deletePurchase(@NonNull RecyclerView.ViewHolder viewHolder) {
+                Purchase mUndPurchase = mHistoryAdapter.getPurchaseAt(
+                        viewHolder.getAdapterPosition());
                 mPurchasesViewModel.delete(mHistoryAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition()));
 
-                Toast.makeText(getActivity(), TOAST_DELETE, Toast.LENGTH_SHORT).show();
+                undoDeleteSwipe(mUndPurchase);
             }
         }).attachToRecyclerView(mRecyclerView);
 
+    }
+
+    private void undoSendToHistorySwipe(Purchase updatedPurchase) {
+        Snackbar mUndoSnackbar = Snackbar
+                .make(mLayout, CARD_SEND_TO_HISTORY, Snackbar.LENGTH_LONG)
+                .setAction(UNDO_TEXT, view -> {
+                    updatedPurchase.setIsHistory(STATE_IS_HISTORY);
+                    mPurchasesViewModel.update(updatedPurchase);
+                    mHistoryAdapter.addPurchase(updatedPurchase);
+                });
+        mUndoSnackbar.show();
+    }
+
+    private void undoDeleteSwipe(Purchase mUndPurchase) {
+        Snackbar mUndoSnackbar = Snackbar
+                .make(mLayout, CARD_DELETE, Snackbar.LENGTH_LONG)
+                .setAction(UNDO_TEXT, view ->
+                        mPurchasesViewModel.insert(mUndPurchase));
+        mUndoSnackbar.show();
     }
 
     private void addOptionsMenu() {
@@ -98,12 +149,12 @@ public class HistoryFragment extends Fragment {
     }
 
     private void createBundleForDialogFragment(Purchase purchase) {
-        DialogFragment updatePurchaseFragment = new AddOrUpdatePurchaseFragment();
+        DialogFragment updateHistoryFragment = new UpgradeHistoryFragment();
         Bundle mBundle = new Bundle();
         mBundle.putParcelable(UPDATED_PURCHASE, purchase);
-        updatePurchaseFragment.setArguments(mBundle);
+        updateHistoryFragment.setArguments(mBundle);
         if(getFragmentManager() != null) {
-            updatePurchaseFragment.show(getFragmentManager(), FRAGMENT_DIALOG);
+            updateHistoryFragment.show(getFragmentManager(), FRAGMENT_DIALOG_HISTORY);
         }
     }
 
@@ -112,11 +163,12 @@ public class HistoryFragment extends Fragment {
         mHistoryAdapter = new HistoryAdapter();
         mHistoryAdapter.setOnItemClickListener(this::createBundleForDialogFragment);
         mRecyclerView.setAdapter(mHistoryAdapter);
+        mLayout = root.findViewById(R.id.history_layout);
     }
 
     private void provideViewModel() {
         if( getActivity() != null) {
-            mPurchasesViewModel = ViewModelProviders.of(getActivity())
+            mPurchasesViewModel = ViewModelProviders.of(getActivity(), new PurhaseViewModelFactory(getActivity()))
                     .get(PurchasesViewModel.class);
             mPurchasesViewModel.getAllPurchasesInHistory()
                     .observe(this, purchases -> {

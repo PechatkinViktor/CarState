@@ -1,5 +1,6 @@
 package com.pechatkin.carstate.presentation.ui.purchases;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.pechatkin.carstate.presentation.ui.utils.PurchaseDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
 
 public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.PurchasesHolder> {
 
@@ -42,6 +45,10 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
 
     Purchase getPurchaseAt(int position) {
         return mPurchases.get(position);
+    }
+
+    void addPurchase(Purchase purchase) {
+        mPurchases.add(purchase);
     }
 
     void setPurchases(List<Purchase> purchases) {
@@ -78,12 +85,13 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
             });
         }
 
+        @SuppressLint("DefaultLocale")
         private void bindView(Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
             mPurchaseDate.setText(purchase.getAddPurchasesDate());
             mPurchaseCategory.setText(purchase.getCategory());
             mPurchaseDesc.setText(purchase.getDescription());
-            mPurchasePrise.setText(String.valueOf(purchase.getPrise()));
+            mPurchasePrise.setText(String.format(PRISE_FORMAT, purchase.getPrise()));
         }
     }
 

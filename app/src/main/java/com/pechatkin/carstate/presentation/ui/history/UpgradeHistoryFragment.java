@@ -12,19 +12,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
-import com.pechatkin.carstate.presentation.PurchasesViewModel;
+import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
+import com.pechatkin.carstate.presentation.viewmodel.PurhaseViewModelFactory;
 
 import java.util.Date;
 
-public class UpgradeHistoryFragment extends Fragment {
+import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.UPDATED_PURCHASE;
 
-    private static final String DATE_FORMAT_PATTERN = "dd.MM.yyyy";
-    private static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
+public class UpgradeHistoryFragment extends DialogFragment {
+
 
     private Bundle mBundle;
     private EditText mEditTextTitle;
@@ -114,12 +116,11 @@ public class UpgradeHistoryFragment extends Fragment {
             mUpdatedPurchase.setCategory(newPurchaseCategory);
 
             if( getActivity() != null) {
-                PurchasesViewModel mPurchasesViewModel =
-                        ViewModelProviders.of(getActivity()).get(PurchasesViewModel.class);
+                PurchasesViewModel mPurchasesViewModel = ViewModelProviders.of(getActivity(), new PurhaseViewModelFactory(getActivity()))
+                        .get(PurchasesViewModel.class);
                 mPurchasesViewModel.update(mUpdatedPurchase);
+                UpgradeHistoryFragment.this.dismiss();
             }
         }
     }
-
-
 }

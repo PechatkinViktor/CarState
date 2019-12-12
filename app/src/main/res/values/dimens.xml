@@ -2,7 +2,9 @@
 <resources>
     <dimen name="fab_margin">32dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="padding_small">16dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="margin_big">32dp</dimen>
     <dimen name="dialog_fragment_min_width">700dp</dimen>
+    <dimen name="margin_very_small">4dp</dimen>
 </resources>

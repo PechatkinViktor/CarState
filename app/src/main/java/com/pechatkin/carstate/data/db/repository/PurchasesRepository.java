@@ -1,6 +1,6 @@
 package com.pechatkin.carstate.data.db.repository;
 
-import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -17,8 +17,8 @@ public class PurchasesRepository {
     private PurchaseDao mPurchaseDao;
     private LiveData<List<Purchase>> mAllPurchases;
 
-    public PurchasesRepository(@NonNull Application application) {
-        AppDatabase appDatabase = AppDatabase.getInstance(application);
+    public PurchasesRepository(@NonNull Context context) {
+        AppDatabase appDatabase = AppDatabase.getInstance(context.getApplicationContext());
         mPurchaseDao = appDatabase.mPurchaseDao();
         mAllPurchases = mPurchaseDao.getAllPurchases();
     }

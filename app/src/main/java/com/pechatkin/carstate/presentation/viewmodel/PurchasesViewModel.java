@@ -1,11 +1,9 @@
-package com.pechatkin.carstate.presentation;
-
-import android.app.Application;
+package com.pechatkin.carstate.presentation.viewmodel;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
+import androidx.lifecycle.ViewModel;
 
 import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.data.db.repository.PurchasesRepository;
@@ -13,17 +11,16 @@ import com.pechatkin.carstate.data.db.repository.PurchasesRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasesViewModel extends AndroidViewModel {
+public class PurchasesViewModel extends ViewModel {
 
     private PurchasesRepository mPurchasesRepository;
 
     private LiveData<List<Purchase>> mAllPurchasesInPlanned;
     private LiveData<List<Purchase>> mAllPurchasesInHistory;
 
-    public PurchasesViewModel(@NonNull Application application) {
-        super(application);
+    PurchasesViewModel(@NonNull PurchasesRepository purchasesRepository) {
 
-        mPurchasesRepository = new PurchasesRepository(application);
+        mPurchasesRepository = purchasesRepository;
         LiveData<List<Purchase>> allPurchases = mPurchasesRepository.getAllPurchases();
         mAllPurchasesInPlanned = Transformations.map(allPurchases,
                 this::returnOnlyInPlanned);
@@ -35,16 +32,13 @@ public class PurchasesViewModel extends AndroidViewModel {
         mPurchasesRepository.insert(purchase);
     }
 
-    public void update(Purchase purchase) {
-        mPurchasesRepository.update(purchase);
-    }
+    public void update(Purchase purchase) { mPurchasesRepository.update(purchase); }
 
     public void delete(Purchase purchase) {
         mPurchasesRepository.delete(purchase);
     }
 
     public void deleteAllPurchases() { mPurchasesRepository.deleteAllPurchases(); }
-
 
     public LiveData<List<Purchase>> getAllPurchasesInPlanned() {
         return mAllPurchasesInPlanned;

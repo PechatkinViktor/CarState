@@ -1,5 +1,6 @@
 package com.pechatkin.carstate.presentation.ui.history;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.pechatkin.carstate.presentation.ui.utils.PurchaseDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
 
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryHolder>{
@@ -40,6 +43,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         return mPurchasesInHistory.size();
     }
 
+    public void addPurchase(Purchase updatedPurchase) {
+        mPurchasesInHistory.add(updatedPurchase);
+    }
+
+    public void updatePurchase(Purchase purchase, int position) {
+        this.notifyItemRangeChanged(position, getItemCount(), purchase);
+    }
+
     Purchase getPurchaseAt(int position) {
         return mPurchasesInHistory.get(position);
     }
@@ -51,6 +62,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         mPurchasesInHistory.addAll(purchases);
         diffResult.dispatchUpdatesTo(this);
     }
+
+
 
     class HistoryHolder extends RecyclerView.ViewHolder {
 
@@ -77,12 +90,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
             });
         }
 
+        @SuppressLint("DefaultLocale")
         void bindView(Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
             mPurchaseDateInHistory.setText(purchase.getAddHistoryDate());
             mPurchaseCategory.setText(purchase.getCategory());
             mPurchaseDesc.setText(purchase.getDescription());
-            mPurchasePrise.setText(String.valueOf(purchase.getPrise()));
+            mPurchasePrise.setText(String.format(PRISE_FORMAT, purchase.getPrise()));
         }
     }
 

@@ -17,14 +17,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
-import com.pechatkin.carstate.presentation.PurchasesViewModel;
+import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
+import com.pechatkin.carstate.presentation.viewmodel.PurhaseViewModelFactory;
 
 import java.util.Date;
 
-public class AddOrUpdatePurchaseFragment extends DialogFragment {
+import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.UPDATED_PURCHASE;
 
-    private static final String DATE_FORMAT_PATTERN = "dd.MM.yyyy";
-    private static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
+public class AddOrUpdatePurchaseFragment extends DialogFragment {
 
     private Bundle mBundle;
     private EditText mEditTextTitle;
@@ -117,8 +118,8 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
             mUpdatedPurchase.setCategory(newPurchaseCategory);
 
             if( getActivity() != null) {
-                PurchasesViewModel mPurchasesViewModel =
-                        ViewModelProviders.of(getActivity()).get(PurchasesViewModel.class);
+                PurchasesViewModel mPurchasesViewModel = ViewModelProviders.of(getActivity(), new PurhaseViewModelFactory(getActivity()))
+                        .get(PurchasesViewModel.class);
                 mPurchasesViewModel.update(mUpdatedPurchase);
                 AddOrUpdatePurchaseFragment.this.dismiss();
             }
