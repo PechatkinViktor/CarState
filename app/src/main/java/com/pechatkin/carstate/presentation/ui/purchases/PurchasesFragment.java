@@ -28,7 +28,7 @@ import java.util.Date;
 
 public class PurchasesFragment extends Fragment {
 
-    private static final String FRAGMENT_DIALOG = "fragment_dialog";
+    private static final String FRAGMENT_DIALOG = "fragment_dialog_planned";
     private static final String TOAST_DELETE = "Запись удалена";
     private static final String TOAST_TO_HISTORY = "Отправлено в историю";
     private static final int DRAG_DIRS = 0;
@@ -111,14 +111,14 @@ public class PurchasesFragment extends Fragment {
             }
 
             private void deletePurchase(@NonNull RecyclerView.ViewHolder viewHolder) {
+                Purchase mUndourchase = mPurchasesAdapter.getPurchaseAt(
+                        viewHolder.getAdapterPosition());
                 mPurchasesViewModel.delete(mPurchasesAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition()));
 
-                Toast.makeText(getActivity(), TOAST_DELETE, Toast.LENGTH_SHORT).show();
+                //Snackbar mUndoSnackbar = Snackbar.make()
             }
         }).attachToRecyclerView(mRecyclerView);
-
-        mPurchasesAdapter.setOnItemClickListener(this::createBundleForDialogFragment);
     }
 
     private void createBundleForDialogFragment(Purchase purchase) {
@@ -148,6 +148,7 @@ public class PurchasesFragment extends Fragment {
     private void initRecyclerView(View root) {
         mRecyclerView = root.findViewById(R.id.recyler_view_purchases);
         mPurchasesAdapter = new PurchasesAdapter();
+        mPurchasesAdapter.setOnItemClickListener(this::createBundleForDialogFragment);
         mRecyclerView.setAdapter(mPurchasesAdapter);
     }
 

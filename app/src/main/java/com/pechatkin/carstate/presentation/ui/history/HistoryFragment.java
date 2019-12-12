@@ -11,19 +11,24 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pechatkin.carstate.R;
+import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.presentation.PurchasesViewModel;
+import com.pechatkin.carstate.presentation.ui.purchases.AddOrUpdatePurchaseFragment;
 
 public class HistoryFragment extends Fragment {
 
     private static final String TOAST_DELETE_ALL = "Все карточки удалены";
     private static final String TOAST_DELETE = "Запись удалена";
     private static final int DRAG_DIRS = 0;
+    private static final String FRAGMENT_DIALOG = "fragment_dialog_history";
+    private static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
 
     private PurchasesViewModel mPurchasesViewModel;
     private RecyclerView mRecyclerView;
@@ -86,17 +91,26 @@ public class HistoryFragment extends Fragment {
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        mHistoryAdapter.setOnItemClickListener(purchase ->
-                Toast.makeText(getActivity(), "Click for Update", Toast.LENGTH_SHORT).show());
     }
 
     private void addOptionsMenu() {
         setHasOptionsMenu(true);
     }
 
+    private void createBundleForDialogFragment(Purchase purchase) {
+        DialogFragment updatePurchaseFragment = new AddOrUpdatePurchaseFragment();
+        Bundle mBundle = new Bundle();
+        mBundle.putParcelable(UPDATED_PURCHASE, purchase);
+        updatePurchaseFragment.setArguments(mBundle);
+        if(getFragmentManager() != null) {
+            updatePurchaseFragment.show(getFragmentManager(), FRAGMENT_DIALOG);
+        }
+    }
+
     private void initRecyclerView(View root) {
         mRecyclerView = root.findViewById(R.id.recyler_view_history);
         mHistoryAdapter = new HistoryAdapter();
+        mHistoryAdapter.setOnItemClickListener(this::createBundleForDialogFragment);
         mRecyclerView.setAdapter(mHistoryAdapter);
     }
 

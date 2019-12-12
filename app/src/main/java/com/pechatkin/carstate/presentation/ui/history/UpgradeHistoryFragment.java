@@ -1,4 +1,4 @@
-package com.pechatkin.carstate.presentation.ui.purchases;
+package com.pechatkin.carstate.presentation.ui.history;
 
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.pechatkin.carstate.R;
@@ -21,7 +21,7 @@ import com.pechatkin.carstate.presentation.PurchasesViewModel;
 
 import java.util.Date;
 
-public class AddOrUpdatePurchaseFragment extends DialogFragment {
+public class UpgradeHistoryFragment extends Fragment {
 
     private static final String DATE_FORMAT_PATTERN = "dd.MM.yyyy";
     private static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
@@ -34,8 +34,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_add_or_update, container, false);
     }
@@ -79,6 +78,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
     }
 
     private void initViews(View root) {
+
         mEditTextTitle = root.findViewById(R.id.text_input_title_add_purchase);
         mEditTextDesc = root.findViewById(R.id.text_input_desc_add_purchase);
         mEditTextPrise = root.findViewById(R.id.text_input_prise_add_purchase);
@@ -99,9 +99,6 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
             if (mBundle != null) {
                 updatePurchase(newPurchaseTitle, newPurchaseDesc, newPurchasePrise,
                         newPurchaseDateAdded, newPurchaseCategory);
-            } else {
-                createNewPurchase(newPurchaseTitle, newPurchaseDesc, newPurchasePrise,
-                        newPurchaseDateAdded, newPurchaseCategory);
             }
         });
     }
@@ -120,22 +117,9 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
                 PurchasesViewModel mPurchasesViewModel =
                         ViewModelProviders.of(getActivity()).get(PurchasesViewModel.class);
                 mPurchasesViewModel.update(mUpdatedPurchase);
-                AddOrUpdatePurchaseFragment.this.dismiss();
             }
         }
     }
 
-    private void createNewPurchase(String newPurchaseTitle, String newPurchaseDesc,
-                                   float newPurchasePrise, String newPurchaseDateAdded, String newPurchaseCategory) {
 
-        Purchase newPurchase = new Purchase(newPurchaseTitle, newPurchaseDesc,
-                newPurchaseDateAdded, newPurchasePrise, newPurchaseCategory);
-
-        if( getActivity() != null) {
-            PurchasesViewModel mPurchasesViewModel =
-                    ViewModelProviders.of(getActivity()).get(PurchasesViewModel.class);
-            mPurchasesViewModel.insert(newPurchase);
-            AddOrUpdatePurchaseFragment.this.dismiss();
-        }
-    }
 }
