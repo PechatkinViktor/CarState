@@ -1,6 +1,5 @@
 package com.pechatkin.carstate.presentation.ui.purchases;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +17,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
-import com.pechatkin.carstate.presentation.viewmodel.PurhaseViewModelFactory;
+import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModelFactory;
 
-import java.util.Date;
-
-import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_PLANNED;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.UPDATED_PURCHASE;
 
 public class AddOrUpdatePurchaseFragment extends DialogFragment {
 
+    private PurchasesViewModel mPurchasesViewModel;
     private Bundle mBundle;
     private EditText mEditTextTitle;
     private EditText mEditTextDesc;
@@ -47,6 +45,15 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
 
         initViews(view);
         getInputValues(view);
+        setupMvvm();
+    }
+
+    private void setupMvvm() {
+        if( getActivity() != null) {
+            mPurchasesViewModel = ViewModelProviders
+                    .of(getActivity(), new PurchasesViewModelFactory(getActivity()))
+                    .get(PurchasesViewModel.class);
+        }
     }
 
     private void getInputValues(View view) {
@@ -68,7 +75,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
         mEditTextPrise.setText(String.valueOf(inputPurchase.getPrise()));
         findSpinnerItemPosition(inputPurchase.getCategory());
         ((Button)view.findViewById(R.id.button_add_purchase)).setText(R.string.update);
-        ((TextView)view.findViewById(R.id.text_title_add_purchase)).setText(getString(R.string.update_card));
+        ((TextView)view.findViewById(R.id.text_title_add_purchase)).setText(R.string.update_card);
     }
 
     private void findSpinnerItemPosition(String mCategory) {
@@ -87,56 +94,26 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
         Button mButtonOk = root.findViewById(R.id.button_add_purchase);
 
         mButtonOk.setOnClickListener(view -> {
-            String newPurchaseTitle =
-                    String.valueOf(mEditTextTitle.getText());
-            String newPurchaseDesc =
-                    String.valueOf(mEditTextDesc.getText());
-            float newPurchasePrise =
-                    Float.valueOf(String.valueOf(mEditTextPrise.getText()));
-            String newPurchaseDateAdded = String.valueOf(
-                    new SimpleDateFormat(DATE_FORMAT_PATTERN).format(new Date()));
-            String newPurchaseCategory =
-                    String.valueOf(mSpinnerCategory.getSelectedItem());
+
             if (mBundle != null) {
-                updatePurchase(newPurchaseTitle, newPurchaseDesc, newPurchasePrise,
-                        newPurchaseDateAdded, newPurchaseCategory);
+                Purchase mUpdatedPurchase = mBundle.getParcelable(UPDATED_PURCHASE);
+                if(mUpdatedPurchase != null) {
+                    mPurchasesViewModel.createUpdatedPurchase(
+                            mUpdatedPurchase,
+                            mEditTextTitle.getText().toString(),
+                            mEditTextDesc.getText().toString(),
+                            Float.valueOf(mEditTextPrise.getText().toString()),
+                            mSpinnerCategory.getSelectedItem().toString(),
+                            STATE_IS_PLANNED);
+                }
             } else {
-                createNewPurchase(newPurchaseTitle, newPurchaseDesc, newPurchasePrise,
-                        newPurchaseDateAdded, newPurchaseCategory);
+                mPurchasesViewModel.createNewPurchase(
+                        mEditTextTitle.getText().toString(),
+                        mEditTextDesc.getText().toString(),
+                        Float.valueOf(mEditTextPrise.getText().toString()),
+                        mSpinnerCategory.getSelectedItem().toString());
             }
-        });
-    }
-
-    private void updatePurchase(String newPurchaseTitle, String newPurchaseDesc,
-                                float newPurchasePrise, String newPurchaseDateAdded, String newPurchaseCategory) {
-        Purchase mUpdatedPurchase = mBundle.getParcelable(UPDATED_PURCHASE);
-        if(mUpdatedPurchase != null) {
-            mUpdatedPurchase.setTitle(newPurchaseTitle);
-            mUpdatedPurchase.setDescription(newPurchaseDesc);
-            mUpdatedPurchase.setPrise(newPurchasePrise);
-            mUpdatedPurchase.setAddPurchasesDate(newPurchaseDateAdded);
-            mUpdatedPurchase.setCategory(newPurchaseCategory);
-
-            if( getActivity() != null) {
-                PurchasesViewModel mPurchasesViewModel = ViewModelProviders.of(getActivity(), new PurhaseViewModelFactory(getActivity()))
-                        .get(PurchasesViewModel.class);
-                mPurchasesViewModel.update(mUpdatedPurchase);
-                AddOrUpdatePurchaseFragment.this.dismiss();
-            }
-        }
-    }
-
-    private void createNewPurchase(String newPurchaseTitle, String newPurchaseDesc,
-                                   float newPurchasePrise, String newPurchaseDateAdded, String newPurchaseCategory) {
-
-        Purchase newPurchase = new Purchase(newPurchaseTitle, newPurchaseDesc,
-                newPurchaseDateAdded, newPurchasePrise, newPurchaseCategory);
-
-        if( getActivity() != null) {
-            PurchasesViewModel mPurchasesViewModel =
-                    ViewModelProviders.of(getActivity()).get(PurchasesViewModel.class);
-            mPurchasesViewModel.insert(newPurchase);
             AddOrUpdatePurchaseFragment.this.dismiss();
-        }
+        });
     }
 }

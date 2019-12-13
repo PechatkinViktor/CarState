@@ -16,7 +16,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:layout_marginBottom="@dimen/margin_small"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/text_input_title_add_purchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:hint="@string/title"
         tools:ignore="Autofill" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/text_input_desc_add_purchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_marginBottom="@dimen/margin_small"
         android:entries="@array/menu_spinner_category" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/text_input_prise_add_purchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:background="?colorAccent"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
+        android:paddingStart="@dimen/padding_big"
+        android:paddingEnd="@dimen/padding_big"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_big"
         android:text="@string/btn_add"/>

@@ -11,8 +11,11 @@ public class Const {
     public static final String DATE_FORMAT_PATTERN = "dd.MM.yyyy";
     public static final String TOAST_DELETE_ALL = "Все карточки удалены";
     public static final boolean STATE_IS_HISTORY = true;
+    public static final boolean STATE_IS_PLANNED = false;
     public static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
+    public static final String UPDATED_PURCHASE_POSITION = "UPDATED_PURCHASE_POSITION";
     public static final String PRISE_FORMAT = "%.2f Руб";
     public static final String CARD_DELETE = "Карточка удалена";
     public static final String CARD_SEND_TO_HISTORY = "Карточка отправлена в историю";
+    public static final String CARD_SEND_TO_PLANNED = "Карточка отправлена в покупки";
 }

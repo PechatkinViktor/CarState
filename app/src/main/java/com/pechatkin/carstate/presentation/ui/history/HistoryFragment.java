@@ -1,6 +1,5 @@
 package com.pechatkin.carstate.presentation.ui.history;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,12 +22,14 @@ import com.google.android.material.snackbar.Snackbar;
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
-import com.pechatkin.carstate.presentation.viewmodel.PurhaseViewModelFactory;
+import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModelFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_DELETE;
-import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_SEND_TO_HISTORY;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_SEND_TO_PLANNED;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DRAG_DIRS;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.FRAGMENT_DIALOG_HISTORY;
@@ -57,7 +58,7 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initRecyclerView(view);
-        provideViewModel();
+        setupMvvm();
         addSwipeListener();
         addOptionsMenu();
     }
@@ -105,8 +106,8 @@ public class HistoryFragment extends Fragment {
             private void sendPurchaseToPlanned(RecyclerView.ViewHolder viewHolder) {
                 Purchase updatedPurchase = mHistoryAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
-                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(DATE_FORMAT_PATTERN)
-                        .format(new Date()));
+                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(
+                        DATE_FORMAT_PATTERN, Locale.US).format(new Date()));
                 updatedPurchase.setIsHistory(!STATE_IS_HISTORY);
                 mPurchasesViewModel.update(updatedPurchase);
 
@@ -127,7 +128,7 @@ public class HistoryFragment extends Fragment {
 
     private void undoSendToHistorySwipe(Purchase updatedPurchase) {
         Snackbar mUndoSnackbar = Snackbar
-                .make(mLayout, CARD_SEND_TO_HISTORY, Snackbar.LENGTH_LONG)
+                .make(mLayout, CARD_SEND_TO_PLANNED, Snackbar.LENGTH_LONG)
                 .setAction(UNDO_TEXT, view -> {
                     updatedPurchase.setIsHistory(STATE_IS_HISTORY);
                     mPurchasesViewModel.update(updatedPurchase);
@@ -166,14 +167,20 @@ public class HistoryFragment extends Fragment {
         mLayout = root.findViewById(R.id.history_layout);
     }
 
-    private void provideViewModel() {
+    private void setupMvvm() {
         if( getActivity() != null) {
-            mPurchasesViewModel = ViewModelProviders.of(getActivity(), new PurhaseViewModelFactory(getActivity()))
+            mPurchasesViewModel = ViewModelProviders.of(getActivity(),
+                    new PurchasesViewModelFactory(getActivity()))
                     .get(PurchasesViewModel.class);
             mPurchasesViewModel.getAllPurchasesInHistory()
                     .observe(this, purchases -> {
                         mHistoryAdapter.setPurchases(purchases);
                         mRecyclerView.scrollToPosition(RecyclerView.SCROLLBAR_POSITION_DEFAULT);
+                    });
+            mPurchasesViewModel.getUpdatePurchase()
+                    .observe(this, purchase -> {
+                        mPurchasesViewModel.update(purchase);
+                        mHistoryAdapter.notifyDataSetChanged();
                     });
         }
     }

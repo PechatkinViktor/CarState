@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.pechatkin.carstate.data.db.repository.PurchasesRepository;
 
-public class PurhaseViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+public class PurchasesViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final Context mApplicationContext;
 
-    public PurhaseViewModelFactory(@NonNull Context context) {
+    public PurchasesViewModelFactory(@NonNull Context context) {
         mApplicationContext = context.getApplicationContext();
     }
 

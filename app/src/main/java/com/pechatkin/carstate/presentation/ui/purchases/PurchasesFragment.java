@@ -1,6 +1,5 @@
 package com.pechatkin.carstate.presentation.ui.purchases;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,9 +23,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
-import com.pechatkin.carstate.presentation.viewmodel.PurhaseViewModelFactory;
+import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModelFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_DELETE;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_SEND_TO_HISTORY;
@@ -60,7 +61,7 @@ public class PurchasesFragment extends Fragment {
 
         initRecyclerView(view);
         initFab(view);
-        provideViewModel();
+        setupMvvm();
         addSwipeListener();
         addOptionsMenu();
     }
@@ -108,12 +109,10 @@ public class PurchasesFragment extends Fragment {
             private void sendPurchaseToHistory(@NonNull RecyclerView.ViewHolder viewHolder) {
                 Purchase updatedPurchase = mPurchasesAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
-                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(DATE_FORMAT_PATTERN)
-                        .format(new Date()));
+                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(
+                        DATE_FORMAT_PATTERN, Locale.US).format(new Date()));
                 updatedPurchase.setIsHistory(STATE_IS_HISTORY);
                 mPurchasesViewModel.update(updatedPurchase);
-                mPurchasesAdapter.notifyItemRangeRemoved(viewHolder.getAdapterPosition(),
-                        mPurchasesAdapter.getItemCount());
                 undoSendToHistorySwipe(updatedPurchase);
             }
 
@@ -180,16 +179,20 @@ public class PurchasesFragment extends Fragment {
         mLayout = root.findViewById(R.id.purchases_layout);
     }
 
-    private void provideViewModel() {
+    private void setupMvvm() {
         if( getActivity() != null) {
             mPurchasesViewModel = ViewModelProviders
-                    .of(getActivity(), new PurhaseViewModelFactory(getActivity()))
+                    .of(getActivity(), new PurchasesViewModelFactory(getActivity()))
                     .get(PurchasesViewModel.class);
             mPurchasesViewModel.getAllPurchasesInPlanned()
                     .observe(this, purchases -> {
                         mPurchasesAdapter.setPurchases(purchases);
                         mRecyclerView.scrollToPosition(RecyclerView.SCROLLBAR_POSITION_DEFAULT);
                     });
+            mPurchasesViewModel.getUpdatePurchase().observe(this, purchase -> {
+                mPurchasesViewModel.update(purchase);
+                mPurchasesAdapter.notifyDataSetChanged();
+            });
         }
     }
 }
