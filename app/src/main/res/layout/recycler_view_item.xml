@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/margin_very_small"
+            android:textColor="?colorPrimary"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             tools:text="Категория"/>
 
@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginTop="@dimen/margin_big"
             android:textStyle="italic"
             android:maxLines="1"
             android:layout_below="@+id/text_view_purchases_desc"

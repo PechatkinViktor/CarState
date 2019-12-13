@@ -29,14 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_DELETE;
-import static com.pechatkin.carstate.presentation.ui.utils.Const.CARD_SEND_TO_HISTORY;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DRAG_DIRS;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.FRAGMENT_DIALOG_PLANNED;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_HISTORY;
-import static com.pechatkin.carstate.presentation.ui.utils.Const.TOAST_DELETE_ALL;
-import static com.pechatkin.carstate.presentation.ui.utils.Const.UNDO_TEXT;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.UPDATED_PURCHASE;
 
 
@@ -76,7 +72,7 @@ public class PurchasesFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.delete_all_notes) {
             mPurchasesViewModel.deleteAllPurchases();
-            Toast.makeText(getActivity(), TOAST_DELETE_ALL, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.all_cards_deleted, Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -129,8 +125,8 @@ public class PurchasesFragment extends Fragment {
 
     private void undoSendToHistorySwipe(Purchase updatedPurchase) {
         Snackbar mUndoSnackbar = Snackbar
-                .make(mLayout, CARD_SEND_TO_HISTORY, Snackbar.LENGTH_LONG)
-                .setAction(UNDO_TEXT, view -> {
+                .make(mLayout, getString(R.string.card_send_to_history), Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, view -> {
                     updatedPurchase.setIsHistory(!STATE_IS_HISTORY);
                     mPurchasesViewModel.update(updatedPurchase);
                     mPurchasesAdapter.addPurchase(updatedPurchase);
@@ -140,8 +136,8 @@ public class PurchasesFragment extends Fragment {
 
     private void undoDeleteSwipe(Purchase mUndPurchase) {
         Snackbar mUndoSnackbar = Snackbar
-                .make(mLayout, CARD_DELETE, Snackbar.LENGTH_LONG)
-                .setAction(UNDO_TEXT, view ->
+                .make(mLayout, getString(R.string.card_deleted), Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo, view ->
                         mPurchasesViewModel.insert(mUndPurchase));
         mUndoSnackbar.show();
     }

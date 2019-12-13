@@ -17,6 +17,7 @@ import com.pechatkin.carstate.presentation.ui.utils.PurchaseDiffCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
 
 
@@ -43,12 +44,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         return mPurchasesInHistory.size();
     }
 
-    public void addPurchase(Purchase updatedPurchase) {
+    void addPurchase(Purchase updatedPurchase) {
         mPurchasesInHistory.add(updatedPurchase);
-    }
-
-    public void updatePurchase(Purchase purchase, int position) {
-        this.notifyItemRangeChanged(position, getItemCount(), purchase);
     }
 
     Purchase getPurchaseAt(int position) {
@@ -93,7 +90,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         @SuppressLint("DefaultLocale")
         void bindView(Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
-            mPurchaseDateInHistory.setText(purchase.getAddHistoryDate());
+            mPurchaseDateInHistory.setText(String.format(DATE_FORMAT, purchase.getAddHistoryDate()));
             mPurchaseCategory.setText(purchase.getCategory());
             mPurchaseDesc.setText(purchase.getDescription());
             mPurchasePrise.setText(String.format(PRISE_FORMAT, purchase.getPrise()));

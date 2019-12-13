@@ -22,14 +22,18 @@
     <string name="rub">Руб</string>
 
     <string name="undo">Отменить</string>
+    <string name="card_send_to_history">Карточка отправлена в историю</string>
+    <string name="card_sent_to_planned">Карточка отправлена в покупки</string>
+    <string name="all_cards_deleted">Все карточки удалены</string>
+    <string name="card_deleted">Карточка удалена</string>
 
     <string-array name="menu_spinner_category">
+        <item>ПРОЧЕЕ</item>
         <item>АВТОЗАПЧАСТИ</item>
         <item>РАСХОДНИКИ</item>
         <item>ИНСТРУМЕНТЫ</item>
         <item>АКСЕССУАРЫ</item>
         <item>ШИНЫ/ДИСКИ</item>
-        <item>ПРОЧЕЕ</item>
     </string-array>
 
 </resources>
