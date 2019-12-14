@@ -17,7 +17,6 @@ import com.pechatkin.carstate.presentation.ui.utils.PurchaseDiffCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
 
 public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.PurchasesHolder> {
@@ -89,7 +88,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
         @SuppressLint("DefaultLocale")
         private void bindView(Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
-            mPurchaseDate.setText(String.format(DATE_FORMAT, purchase.getAddPurchasesDate()));
+            mPurchaseDate.setText(purchase.getAddPurchasesDate());
             mPurchaseCategory.setText(purchase.getCategory());
             mPurchaseDesc.setText(purchase.getDescription());
             mPurchasePrise.setText(String.format(PRISE_FORMAT, purchase.getPrise()));

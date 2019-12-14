@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
@@ -28,8 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private void setUpNavigation() {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_purchases, R.id.navigation_history, R.id.navigation_settings)
+                .build();
         NavController navController =
                 Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this,
+                navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
     }

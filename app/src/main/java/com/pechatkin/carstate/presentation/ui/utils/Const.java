@@ -10,7 +10,4 @@ public class Const {
     public static final boolean STATE_IS_PLANNED = false;
     public static final String UPDATED_PURCHASE = "UPDATED_PURCHASE";
     public static final String PRISE_FORMAT = "%.2f Руб";
-    public static final String DATE_FORMAT = "Обновлено: %s";
-    public static final String PREFERENCE_MILEAGE_KEY = "PREFERENCE_MILEAGE_KEY";
-    public static final String ARG_ROOT = "rootScreen";
 }

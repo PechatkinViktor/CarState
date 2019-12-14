@@ -4,11 +4,9 @@
     <string name="bottom_navigation_settings">Настройки</string>
     <string name="bottom_navigation_history">История</string>
     <string name="bottom_navigation_purchases">Покупки</string>
-    <string name="bottom_navigation_home">Главная</string>
 
     <string name="story_purchases">Итория покупок</string>
     <string name="purchases">Планирование покупок</string>
-    <string name="home">Главная</string>
     <string name="app_settings">Настройки приложения</string>
 
     <string name="planned">Запланировать покупку</string>

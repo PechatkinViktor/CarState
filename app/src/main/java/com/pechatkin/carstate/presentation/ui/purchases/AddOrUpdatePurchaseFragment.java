@@ -108,18 +108,18 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
                     if (mUpdatedPurchase != null) {
                         mPurchasesViewModel.createUpdatedPurchase(
                                 mUpdatedPurchase,
-                                mEditTextTitle.getText().toString(),
-                                mEditTextDesc.getText().toString(),
-                                Float.valueOf(mEditTextPrise.getText().toString()),
-                                mSpinnerCategory.getSelectedItem().toString(),
+                                String.valueOf(mEditTextTitle.getText()),
+                                String.valueOf(mEditTextDesc.getText()),
+                                Float.valueOf(String.valueOf(mEditTextPrise.getText())),
+                                String.valueOf(mSpinnerCategory.getSelectedItem()),
                                 STATE_IS_PLANNED);
                     }
                 } else {
                     mPurchasesViewModel.createNewPurchase(
-                            mEditTextTitle.getText().toString(),
-                            mEditTextDesc.getText().toString(),
-                            Float.valueOf(mEditTextPrise.getText().toString()),
-                            mSpinnerCategory.getSelectedItem().toString());
+                            String.valueOf(mEditTextTitle.getText()),
+                            String.valueOf(mEditTextDesc.getText()),
+                            Float.valueOf(String.valueOf(mEditTextPrise.getText())),
+                            String.valueOf(mSpinnerCategory.getSelectedItem()));
                 }
                 AddOrUpdatePurchaseFragment.this.dismiss();
             }

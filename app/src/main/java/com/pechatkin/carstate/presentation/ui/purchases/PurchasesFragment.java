@@ -114,13 +114,14 @@ public class PurchasesFragment extends Fragment {
             }
 
             private void sendPurchaseToHistory(@NonNull RecyclerView.ViewHolder viewHolder) {
-                Purchase updatedPurchase = mPurchasesAdapter.getPurchaseAt(
+                Purchase PurchaseToUpdate = mPurchasesAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
-                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(
-                        DATE_FORMAT_PATTERN, Locale.US).format(new Date()));
-                updatedPurchase.setIsHistory(STATE_IS_HISTORY);
-                mPurchasesViewModel.update(updatedPurchase);
-                undoSendToHistorySwipe(updatedPurchase);
+                PurchaseToUpdate.setAddHistoryDate(new SimpleDateFormat(
+                        DATE_FORMAT_PATTERN, Locale.getDefault()).format(new Date()));
+                PurchaseToUpdate.setIsHistory(STATE_IS_HISTORY);
+                mPurchasesViewModel.update(PurchaseToUpdate);
+
+                undoSendToHistorySwipe(PurchaseToUpdate);
             }
 
             private void deletePurchase(@NonNull RecyclerView.ViewHolder viewHolder) {

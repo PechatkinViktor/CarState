@@ -115,7 +115,7 @@ public class HistoryFragment extends Fragment {
                 Purchase updatedPurchase = mHistoryAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
                 updatedPurchase.setAddPurchasesDate(new SimpleDateFormat(
-                        DATE_FORMAT_PATTERN, Locale.US).format(new Date()));
+                        DATE_FORMAT_PATTERN, Locale.getDefault()).format(new Date()));
                 updatedPurchase.setIsHistory(STATE_IS_PLANNED);
                 mPurchasesViewModel.update(updatedPurchase);
 
@@ -168,7 +168,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initRecyclerView(View root) {
-        mRecyclerView = root.findViewById(R.id.recyler_view_history);
+        mRecyclerView = root.findViewById(R.id.recycler_view_history);
         mHistoryAdapter = new HistoryAdapter();
         mHistoryAdapter.setOnItemClickListener(this::createBundleForDialogFragment);
         mRecyclerView.setAdapter(mHistoryAdapter);

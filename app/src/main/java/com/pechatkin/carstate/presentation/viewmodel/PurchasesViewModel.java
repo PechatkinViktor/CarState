@@ -57,7 +57,7 @@ public class PurchasesViewModel extends ViewModel {
                                       String newPurchaseDesc, float newPurchasePrise,
                                       String newPurchaseCategory, boolean isHistory) {
         String mCurrentDate = new SimpleDateFormat(
-                DATE_FORMAT_PATTERN, Locale.US).format(new Date());
+                DATE_FORMAT_PATTERN, Locale.getDefault()).format(new Date());
         oldPurchase.setTitle(newPurchaseTitle);
         oldPurchase.setDescription(newPurchaseDesc);
         oldPurchase.setPrise(newPurchasePrise);
@@ -69,13 +69,12 @@ public class PurchasesViewModel extends ViewModel {
             }
 
             updatedPurchase.setValue(oldPurchase);
-            updatedPurchase.setValue(oldPurchase);
     }
 
     public void createNewPurchase(String newPurchaseTitle, String newPurchaseDesc,
                                   float newPurchasePrise, String newPurchaseCategory) {
         String mCurrentDate = new SimpleDateFormat(
-                DATE_FORMAT_PATTERN, Locale.US).format(new Date());
+                DATE_FORMAT_PATTERN, Locale.getDefault()).format(new Date());
         Purchase newPurchase = new Purchase(newPurchaseTitle, newPurchaseDesc,
                 mCurrentDate, newPurchasePrise, newPurchaseCategory);
         this.insert(newPurchase);

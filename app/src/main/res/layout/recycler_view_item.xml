@@ -20,8 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textColor="?colorPrimary"
+            android:layout_margin="@dimen/margin_very_small"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            tools:text="Категория"/>
+            tools:text="Категория"
+            tools:ignore="RelativeOverlap" />
 
         <TextView
             android:id="@+id/text_view_purchases_date"
@@ -32,11 +34,18 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             tools:text="25:11:1999"/>
 
+        <View
+            android:id="@+id/puechase_separator"
+            android:layout_width="fill_parent"
+            android:background="@color/colorPrimary"
+            android:layout_below="@id/text_view_purchases_date"
+            android:layout_height="@dimen/separator_height"/>
+
         <TextView
             android:id="@+id/text_view_purchases_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_purchases_category"
+            android:layout_below="@+id/puechase_separator"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:layout_marginTop="@dimen/margin_small"
             android:maxLines="1"
