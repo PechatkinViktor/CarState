@@ -1,6 +1,7 @@
 package com.pechatkin.carstate.presentation.ui.purchases;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,25 +96,33 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
 
         mButtonOk.setOnClickListener(view -> {
 
-            if (mBundle != null) {
-                Purchase mUpdatedPurchase = mBundle.getParcelable(UPDATED_PURCHASE);
-                if(mUpdatedPurchase != null) {
-                    mPurchasesViewModel.createUpdatedPurchase(
-                            mUpdatedPurchase,
+            if(TextUtils.isEmpty(mEditTextTitle.getText())) {
+                mEditTextTitle.setError(getString(R.string.empty_field));
+            } else if(TextUtils.isEmpty(mEditTextDesc.getText())) {
+                mEditTextDesc.setError(getString(R.string.empty_field));
+            } else if(TextUtils.isEmpty(mEditTextPrise.getText())) {
+                mEditTextPrise.setError(getString(R.string.empty_field));
+            } else {
+                if (mBundle != null) {
+                    Purchase mUpdatedPurchase = mBundle.getParcelable(UPDATED_PURCHASE);
+                    if (mUpdatedPurchase != null) {
+                        mPurchasesViewModel.createUpdatedPurchase(
+                                mUpdatedPurchase,
+                                mEditTextTitle.getText().toString(),
+                                mEditTextDesc.getText().toString(),
+                                Float.valueOf(mEditTextPrise.getText().toString()),
+                                mSpinnerCategory.getSelectedItem().toString(),
+                                STATE_IS_PLANNED);
+                    }
+                } else {
+                    mPurchasesViewModel.createNewPurchase(
                             mEditTextTitle.getText().toString(),
                             mEditTextDesc.getText().toString(),
                             Float.valueOf(mEditTextPrise.getText().toString()),
-                            mSpinnerCategory.getSelectedItem().toString(),
-                            STATE_IS_PLANNED);
+                            mSpinnerCategory.getSelectedItem().toString());
                 }
-            } else {
-                mPurchasesViewModel.createNewPurchase(
-                        mEditTextTitle.getText().toString(),
-                        mEditTextDesc.getText().toString(),
-                        Float.valueOf(mEditTextPrise.getText().toString()),
-                        mSpinnerCategory.getSelectedItem().toString());
+                AddOrUpdatePurchaseFragment.this.dismiss();
             }
-            AddOrUpdatePurchaseFragment.this.dismiss();
         });
     }
 }

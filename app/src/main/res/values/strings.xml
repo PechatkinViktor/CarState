@@ -26,6 +26,7 @@
     <string name="card_sent_to_planned">Карточка отправлена в покупки</string>
     <string name="all_cards_deleted">Все карточки удалены</string>
     <string name="card_deleted">Карточка удалена</string>
+    <string name="empty_field">Заполните поле</string>
 
     <string-array name="menu_spinner_category">
         <item>ПРОЧЕЕ</item>

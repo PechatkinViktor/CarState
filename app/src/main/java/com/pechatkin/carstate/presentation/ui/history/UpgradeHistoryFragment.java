@@ -2,6 +2,7 @@ package com.pechatkin.carstate.presentation.ui.history;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,16 +104,24 @@ public class UpgradeHistoryFragment extends DialogFragment {
     }
 
     private void onClickButtonUpdate() {
-        Purchase mUpdatedPurchase = mBundle.getParcelable(UPDATED_PURCHASE);
-        if(mUpdatedPurchase != null) {
-            mPurchasesViewModel.createUpdatedPurchase(
-                    mUpdatedPurchase,
-                    mEditTextTitle.getText().toString(),
-                    mEditTextDesc.getText().toString(),
-                    Float.valueOf(mEditTextPrise.getText().toString()),
-                    String.valueOf(mSpinnerCategory.getSelectedItem()),
-                    STATE_IS_HISTORY);
-            UpgradeHistoryFragment.this.dismiss();
+        if(TextUtils.isEmpty(mEditTextTitle.getText())) {
+            mEditTextTitle.setError(getString(R.string.empty_field));
+        } else if(TextUtils.isEmpty(mEditTextDesc.getText())) {
+            mEditTextDesc.setError(getString(R.string.empty_field));
+        } else if(TextUtils.isEmpty(mEditTextPrise.getText())) {
+            mEditTextPrise.setError(getString(R.string.empty_field));
+        } else {
+            Purchase mUpdatedPurchase = mBundle.getParcelable(UPDATED_PURCHASE);
+            if(mUpdatedPurchase != null) {
+                mPurchasesViewModel.createUpdatedPurchase(
+                        mUpdatedPurchase,
+                        mEditTextTitle.getText().toString(),
+                        mEditTextDesc.getText().toString(),
+                        Float.valueOf(mEditTextPrise.getText().toString()),
+                        String.valueOf(mSpinnerCategory.getSelectedItem()),
+                        STATE_IS_HISTORY);
+                UpgradeHistoryFragment.this.dismiss();
+            }
         }
     }
 }
