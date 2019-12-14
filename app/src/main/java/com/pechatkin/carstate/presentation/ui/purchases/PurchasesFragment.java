@@ -1,5 +1,6 @@
 package com.pechatkin.carstate.presentation.ui.purchases;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -71,8 +72,18 @@ public class PurchasesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.delete_all_notes) {
-            mPurchasesViewModel.deleteAllPurchases();
-            Toast.makeText(getActivity(), R.string.all_cards_deleted, Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.cards_were_deleted)
+                    .setMessage(R.string.confirm_deleted_cards)
+                    .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                        mPurchasesViewModel.deleteAllPurchases();
+                        Toast.makeText(getActivity(),
+                                R.string.all_cards_deleted,
+                                Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                    })
+                    .setNegativeButton(R.string.declane, null)
+                    .show();
             return true;
         }
         return super.onOptionsItemSelected(item);
