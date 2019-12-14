@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pechatkin.carstate.data.db.repository.PurchasesRepository;
+import com.pechatkin.carstate.data.repository.PurchasesRepository;
 
 public class PurchasesViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 

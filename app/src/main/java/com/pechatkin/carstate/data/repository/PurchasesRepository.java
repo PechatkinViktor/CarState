@@ -1,4 +1,4 @@
-package com.pechatkin.carstate.data.db.repository;
+package com.pechatkin.carstate.data.repository;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,6 +13,7 @@ import com.pechatkin.carstate.data.db.entity.Purchase;
 import java.util.List;
 
 public class PurchasesRepository {
+
 
     private PurchaseDao mPurchaseDao;
     private LiveData<List<Purchase>> mAllPurchases;

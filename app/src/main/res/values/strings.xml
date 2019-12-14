@@ -31,6 +31,10 @@
     <string name="confirm_deleted_cards">Вы уверены, что хотите удалить все краточки?</string>
     <string name="yes">Да</string>
     <string name="declane">Отмена</string>
+    <string name="pref_dark_theme_title">Тёмная тема</string>
+    <string name="pref_dark_theme">dark_theme</string>
+    <string name="pref_tutorial">tutorial</string>
+    <string name="pref_tutorial_title">Показать туториал</string>
 
     <string-array name="menu_spinner_category">
         <item>ПРОЧЕЕ</item>

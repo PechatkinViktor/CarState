@@ -7,7 +7,7 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.pechatkin.carstate.data.db.entity.Purchase;
-import com.pechatkin.carstate.data.db.repository.PurchasesRepository;
+import com.pechatkin.carstate.data.repository.PurchasesRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_HISTOR
 public class PurchasesViewModel extends ViewModel {
 
     private PurchasesRepository mPurchasesRepository;
+
 
     private LiveData<List<Purchase>> mAllPurchasesInPlanned;
     private LiveData<List<Purchase>> mAllPurchasesInHistory;
@@ -61,6 +62,7 @@ public class PurchasesViewModel extends ViewModel {
         oldPurchase.setDescription(newPurchaseDesc);
         oldPurchase.setPrise(newPurchasePrise);
         oldPurchase.setCategory(newPurchaseCategory);
+        oldPurchase.setAddPurchasesDate(mCurrentDate);
             if(isHistory){
                 oldPurchase.setAddHistoryDate(mCurrentDate);
                 oldPurchase.setIsHistory(STATE_IS_HISTORY);

@@ -179,7 +179,7 @@ public class PurchasesFragment extends Fragment {
     }
 
     private void initRecyclerView(View root) {
-        mRecyclerView = root.findViewById(R.id.recyler_view_purchases);
+        mRecyclerView = root.findViewById(R.id.recycler_view_purchases);
         mPurchasesAdapter = new PurchasesAdapter();
         mPurchasesAdapter.setOnItemClickListener(this::createBundleForDialogFragment);
         mRecyclerView.setAdapter(mPurchasesAdapter);

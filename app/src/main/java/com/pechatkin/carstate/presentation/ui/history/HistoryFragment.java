@@ -33,6 +33,7 @@ import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PAT
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DRAG_DIRS;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.FRAGMENT_DIALOG_HISTORY;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_HISTORY;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_PLANNED;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.UPDATED_PURCHASE;
 
 public class HistoryFragment extends Fragment {
@@ -113,9 +114,9 @@ public class HistoryFragment extends Fragment {
             private void sendPurchaseToPlanned(RecyclerView.ViewHolder viewHolder) {
                 Purchase updatedPurchase = mHistoryAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
-                updatedPurchase.setAddHistoryDate(new SimpleDateFormat(
+                updatedPurchase.setAddPurchasesDate(new SimpleDateFormat(
                         DATE_FORMAT_PATTERN, Locale.US).format(new Date()));
-                updatedPurchase.setIsHistory(!STATE_IS_HISTORY);
+                updatedPurchase.setIsHistory(STATE_IS_PLANNED);
                 mPurchasesViewModel.update(updatedPurchase);
 
                 undoSendToHistorySwipe(updatedPurchase);

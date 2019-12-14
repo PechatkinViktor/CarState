@@ -7,19 +7,15 @@
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="com.pechatkin.carstate.presentation.ui.history.HistoryFragment"
-        android:label="@string/story_purchases" />
+        android:name="com.pechatkin.carstate.presentation.ui.history.HistoryFragment" />
     <fragment
         android:id="@+id/navigation_purchases"
-        android:name="com.pechatkin.carstate.presentation.ui.purchases.PurchasesFragment"
-        android:label="@string/purchases" />
+        android:name="com.pechatkin.carstate.presentation.ui.purchases.PurchasesFragment" />
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.pechatkin.carstate.presentation.ui.home.HomeFragment"
-        android:label="@string/home" />
+        android:name="com.pechatkin.carstate.presentation.ui.home.HomeFragment" />
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.pechatkin.carstate.presentation.ui.settings.SettingsFragment"
-        android:label="@string/app_settings" />
+        android:name="com.pechatkin.carstate.presentation.ui.settings.SettingsFragment" />
     <fragment android:id="@+id/placeholder" />
 </navigation>
