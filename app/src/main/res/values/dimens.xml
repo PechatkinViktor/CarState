@@ -7,6 +7,7 @@
     <dimen name="margin_big">32dp</dimen>
     <dimen name="dialog_fragment_min_width">700dp</dimen>
     <dimen name="margin_very_small">4dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
     <dimen name="padding_big">32dp</dimen>
     <dimen name="separator_height">1dp</dimen>
 </resources>

@@ -9,15 +9,37 @@
         android:id="@+id/navigation_history"
         android:name="com.pechatkin.carstate.presentation.ui.history.HistoryFragment"
         android:label="@string/story_purchases"
-        />
+        >
+        <action
+            android:id="@+id/action_navigation_history_to_plannedSummaryFragment"
+            app:destination="@id/plannedSummaryFragment" />
+        <action
+            android:id="@+id/action_navigation_history_to_historySummaryFragment"
+            app:destination="@id/historySummaryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_purchases"
         android:name="com.pechatkin.carstate.presentation.ui.purchases.PurchasesFragment"
-        android:label="@string/purchases" />
+        android:label="@string/purchases" >
+        <action
+            android:id="@+id/action_navigation_purchases_to_plannedSummaryFragment"
+            app:destination="@id/plannedSummaryFragment" />
+        <action
+            android:id="@+id/action_navigation_purchases_to_historySummaryFragment"
+            app:destination="@id/historySummaryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.pechatkin.carstate.presentation.ui.settings.SettingsFragment"
         android:label="@string/app_settings" />
     <fragment android:id="@+id/placeholder" />
+    <fragment
+        android:id="@+id/plannedSummaryFragment"
+        android:name="com.pechatkin.carstate.presentation.ui.summary.PlannedSummaryFragment"
+        android:label="@string/all_planned_summary" />
+    <fragment
+        android:id="@+id/historySummaryFragment"
+        android:name="com.pechatkin.carstate.presentation.ui.summary.HistorySummaryFragment"
+        android:label="@string/all_history_summary" />
 </navigation>

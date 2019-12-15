@@ -33,6 +33,17 @@
     <string name="pref_dark_theme">dark_theme</string>
     <string name="pref_tutorial">tutorial</string>
     <string name="pref_tutorial_title">Показать туториал</string>
+    <string name="summary_history">Сводка по истории</string>
+    <string name="summary_planned">Сводка по покупкам</string>
+    <string name="summary_history_prise">Общая сумма затрат</string>
+    <string name="other">ПРОЧЕЕ</string>
+    <string name="auto_parts">АВТОЗАПЧАСТИ</string>
+    <string name="consum">РАСХОДНИКИ</string>
+    <string name="tools">ИНСТРУМЕНТЫ</string>
+    <string name="accessories">АКСЕССУАРЫ</string>
+    <string name="disc_tires">ШИНЫ/ДИСКИ</string>
+    <string name="all_planned_summary">Все планируемые расходы </string>
+    <string name="all_history_summary">Все расходы из истории</string>
 
     <string-array name="menu_spinner_category">
         <item>ПРОЧЕЕ</item>

@@ -16,6 +16,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,20 +70,33 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.delete_all_notes) {
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.cards_were_deleted)
-                    .setMessage(R.string.confirm_deleted_cards)
-                    .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                        mPurchasesViewModel.deleteAllPurchases();
-                        Toast.makeText(getActivity(),
-                                R.string.all_cards_deleted,
-                                Toast.LENGTH_SHORT).show();
-                        dialogInterface.dismiss();
-                    })
-                    .setNegativeButton(R.string.declane, null)
-                    .show();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.delete_all_notes:
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.cards_were_deleted)
+                        .setMessage(R.string.confirm_deleted_cards)
+                        .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                            mPurchasesViewModel.deleteAllPurchases();
+                            Toast.makeText(getActivity(),
+                                    R.string.all_cards_deleted,
+                                    Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                        })
+                        .setNegativeButton(R.string.declane, null)
+                        .show();
+                return true;
+            case R.id.summary_planned:
+                if(getActivity() != null) {
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
+                            .navigate(R.id.action_navigation_history_to_plannedSummaryFragment);
+                    return true;
+                }
+            case R.id.summary_history:
+                if(getActivity() != null) {
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
+                            .navigate(R.id.action_navigation_history_to_historySummaryFragment);
+                    return true;
+                }
         }
         return super.onOptionsItemSelected(item);
     }

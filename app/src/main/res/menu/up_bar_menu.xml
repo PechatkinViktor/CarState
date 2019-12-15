@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/planned_info"
-        android:title=""
+        android:id="@+id/summary_planned"
+        android:title="@string/summary_planned"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/history_info"
-        android:title="@string/delete_all_cards"
+        android:id="@+id/summary_history"
+        android:title="@string/summary_history"
         app:showAsAction="never" />
 
 
