@@ -19,7 +19,6 @@ import java.util.Locale;
 
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
-import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_HISTORY;
 
 public class PurchasesViewModel extends ViewModel {
 
@@ -66,10 +65,8 @@ public class PurchasesViewModel extends ViewModel {
         oldPurchase.setPrise(newPurchasePrise);
         oldPurchase.setCategory(newPurchaseCategory);
         oldPurchase.setAddPurchasesDate(mCurrentDate);
-            if(isHistory){
-                oldPurchase.setAddHistoryDate(mCurrentDate);
-                oldPurchase.setIsHistory(STATE_IS_HISTORY);
-            }
+        oldPurchase.setAddHistoryDate(mCurrentDate);
+        oldPurchase.setIsHistory(isHistory);
 
             updatedPurchase.setValue(oldPurchase);
     }

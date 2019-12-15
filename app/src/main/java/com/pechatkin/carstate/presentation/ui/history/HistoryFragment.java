@@ -199,10 +199,7 @@ public class HistoryFragment extends Fragment {
                         mRecyclerView.scrollToPosition(RecyclerView.SCROLLBAR_POSITION_DEFAULT);
                     });
             mPurchasesViewModel.getUpdatePurchase()
-                    .observe(this, purchase -> {
-                        mPurchasesViewModel.update(purchase);
-                        mHistoryAdapter.notifyDataSetChanged();
-                    });
+                    .observe(this, purchase -> mHistoryAdapter.notifyDataSetChanged());
         }
     }
 }

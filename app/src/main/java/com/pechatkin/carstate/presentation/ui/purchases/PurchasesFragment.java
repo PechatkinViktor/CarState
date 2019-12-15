@@ -210,10 +210,7 @@ public class PurchasesFragment extends Fragment {
                         mPurchasesAdapter.setPurchases(purchases);
                         mRecyclerView.scrollToPosition(RecyclerView.SCROLLBAR_POSITION_DEFAULT);
                     });
-            mPurchasesViewModel.getUpdatePurchase().observe(this, purchase -> {
-                mPurchasesViewModel.update(purchase);
-                mPurchasesAdapter.notifyDataSetChanged();
-            });
+            mPurchasesViewModel.getUpdatePurchase().observe(this, purchase -> mPurchasesAdapter.notifyDataSetChanged());
         }
     }
 }
