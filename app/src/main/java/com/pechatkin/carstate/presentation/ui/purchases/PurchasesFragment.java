@@ -141,8 +141,7 @@ public class PurchasesFragment extends Fragment {
             private void deletePurchase(@NonNull RecyclerView.ViewHolder viewHolder) {
                 Purchase mUndPurchase = mPurchasesAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
-                mPurchasesViewModel.delete(mPurchasesAdapter.getPurchaseAt(
-                        viewHolder.getAdapterPosition()));
+                mPurchasesViewModel.delete(mUndPurchase);
 
                 undoDeleteSwipe(mUndPurchase);
             }

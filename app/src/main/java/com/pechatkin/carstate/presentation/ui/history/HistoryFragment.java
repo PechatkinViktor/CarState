@@ -139,8 +139,7 @@ public class HistoryFragment extends Fragment {
             private void deletePurchase(@NonNull RecyclerView.ViewHolder viewHolder) {
                 Purchase mUndPurchase = mHistoryAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
-                mPurchasesViewModel.delete(mHistoryAdapter.getPurchaseAt(
-                        viewHolder.getAdapterPosition()));
+                mPurchasesViewModel.delete(mUndPurchase);
 
                 undoDeleteSwipe(mUndPurchase);
             }
