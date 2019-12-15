@@ -148,7 +148,7 @@ public class PurchasesFragment extends Fragment {
         }).attachToRecyclerView(mRecyclerView);
     }
 
-    private void undoSendToHistorySwipe(Purchase updatedPurchase) {
+    private void undoSendToHistorySwipe(@NonNull Purchase updatedPurchase) {
         Snackbar mUndoSnackbar = Snackbar
                 .make(mLayout, getString(R.string.card_send_to_history), Snackbar.LENGTH_LONG)
                 .setAction(R.string.undo, view -> {
@@ -159,7 +159,7 @@ public class PurchasesFragment extends Fragment {
         mUndoSnackbar.show();
     }
 
-    private void undoDeleteSwipe(Purchase mUndPurchase) {
+    private void undoDeleteSwipe(@NonNull Purchase mUndPurchase) {
         Snackbar mUndoSnackbar = Snackbar
                 .make(mLayout, getString(R.string.card_deleted), Snackbar.LENGTH_LONG)
                 .setAction(R.string.undo, view ->
@@ -167,7 +167,7 @@ public class PurchasesFragment extends Fragment {
         mUndoSnackbar.show();
     }
 
-    private void createBundleForDialogFragment(Purchase purchase) {
+    private void createBundleForDialogFragment(@NonNull Purchase purchase) {
         DialogFragment mAddOrUpdatePurchaseFragment = new AddOrUpdatePurchaseFragment();
         Bundle mBundle = new Bundle();
         mBundle.putParcelable(UPDATED_PURCHASE, purchase);
@@ -181,7 +181,7 @@ public class PurchasesFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    private void initFab(View root) {
+    private void initFab(@NonNull View root) {
         FloatingActionButton fab = root.findViewById(R.id.fab_purchases);
 
         fab.setOnClickListener(view -> {
@@ -192,7 +192,7 @@ public class PurchasesFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView(View root) {
+    private void initRecyclerView(@NonNull View root) {
         mRecyclerView = root.findViewById(R.id.recycler_view_purchases);
         mPurchasesAdapter = new PurchasesAdapter();
         mPurchasesAdapter.setOnItemClickListener(this::createBundleForDialogFragment);

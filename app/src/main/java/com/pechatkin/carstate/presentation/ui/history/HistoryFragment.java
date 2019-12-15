@@ -125,7 +125,7 @@ public class HistoryFragment extends Fragment {
                 }
             }
 
-            private void sendPurchaseToPlanned(RecyclerView.ViewHolder viewHolder) {
+            private void sendPurchaseToPlanned(@NonNull RecyclerView.ViewHolder viewHolder) {
                 Purchase updatedPurchase = mHistoryAdapter.getPurchaseAt(
                         viewHolder.getAdapterPosition());
                 updatedPurchase.setAddPurchasesDate(new SimpleDateFormat(
@@ -147,7 +147,7 @@ public class HistoryFragment extends Fragment {
 
     }
 
-    private void undoSendToHistorySwipe(Purchase updatedPurchase) {
+    private void undoSendToHistorySwipe(@NonNull Purchase updatedPurchase) {
         Snackbar mUndoSnackbar = Snackbar
                 .make(mLayout, getString(R.string.card_sent_to_planned), Snackbar.LENGTH_LONG)
                 .setAction(R.string.undo, view -> {
@@ -158,7 +158,7 @@ public class HistoryFragment extends Fragment {
         mUndoSnackbar.show();
     }
 
-    private void undoDeleteSwipe(Purchase mUndPurchase) {
+    private void undoDeleteSwipe(@NonNull Purchase mUndPurchase) {
         Snackbar mUndoSnackbar = Snackbar
                 .make(mLayout, getString(R.string.card_deleted), Snackbar.LENGTH_LONG)
                 .setAction(R.string.undo, view ->
@@ -170,7 +170,7 @@ public class HistoryFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    private void createBundleForDialogFragment(Purchase purchase) {
+    private void createBundleForDialogFragment(@NonNull Purchase purchase) {
         DialogFragment updateHistoryFragment = new UpgradeHistoryFragment();
         Bundle mBundle = new Bundle();
         mBundle.putParcelable(UPDATED_PURCHASE, purchase);
@@ -180,7 +180,7 @@ public class HistoryFragment extends Fragment {
         }
     }
 
-    private void initRecyclerView(View root) {
+    private void initRecyclerView(@NonNull View root) {
         mRecyclerView = root.findViewById(R.id.recycler_view_history);
         mHistoryAdapter = new HistoryAdapter();
         mHistoryAdapter.setOnItemClickListener(this::createBundleForDialogFragment);

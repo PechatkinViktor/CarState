@@ -47,11 +47,11 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
         return mPurchases.get(position);
     }
 
-    void addPurchase(Purchase purchase) {
+    void addPurchase(@NonNull Purchase purchase) {
         mPurchases.add(purchase);
     }
 
-    void setPurchases(List<Purchase> purchases) {
+    void setPurchases(@NonNull List<Purchase> purchases) {
         PurchaseDiffCallback diffCallback = new PurchaseDiffCallback(mPurchases, purchases);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
         mPurchases.clear();
@@ -86,7 +86,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
         }
 
         @SuppressLint("DefaultLocale")
-        private void bindView(Purchase purchase) {
+        private void bindView(@NonNull Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
             mPurchaseDate.setText(purchase.getAddPurchasesDate());
             mPurchaseCategory.setText(purchase.getCategory());
@@ -96,7 +96,7 @@ public class PurchasesAdapter extends RecyclerView.Adapter<PurchasesAdapter.Purc
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Purchase purchase);
+        void onItemClick(@NonNull Purchase purchase);
     }
 
     void setOnItemClickListener(OnItemClickListener listener) {

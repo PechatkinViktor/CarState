@@ -42,7 +42,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         return mPurchasesInHistory.size();
     }
 
-    void addPurchase(Purchase updatedPurchase) {
+    void addPurchase(@NonNull Purchase updatedPurchase) {
         mPurchasesInHistory.add(updatedPurchase);
     }
 
@@ -50,7 +50,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         return mPurchasesInHistory.get(position);
     }
 
-    void setPurchases(List<Purchase> purchases) {
+    void setPurchases(@NonNull List<Purchase> purchases) {
         PurchaseDiffCallback diffCallback = new PurchaseDiffCallback(mPurchasesInHistory, purchases);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
         mPurchasesInHistory.clear();
@@ -86,7 +86,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         }
 
         @SuppressLint("DefaultLocale")
-        void bindView(Purchase purchase) {
+        void bindView(@NonNull Purchase purchase) {
             mPurchaseTitle.setText(purchase.getTitle());
             mPurchaseDateInHistory.setText(purchase.getAddHistoryDate());
             mPurchaseCategory.setText(purchase.getCategory());
@@ -100,7 +100,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         void onItemClick(Purchase purchase);
     }
 
-    void setOnItemClickListener(OnItemClickListener listener) {
+    void setOnItemClickListener(@NonNull OnItemClickListener listener) {
         mClickListener = listener;
     }
 }

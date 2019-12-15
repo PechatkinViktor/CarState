@@ -57,7 +57,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
         }
     }
 
-    private void getInputValues(View view) {
+    private void getInputValues(@NonNull View view) {
 
         mBundle = getArguments();
         if(mBundle != null) {
@@ -70,7 +70,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
         }
     }
 
-    private void setDefaultTextViewValues(View view, Purchase inputPurchase) {
+    private void setDefaultTextViewValues(@NonNull View view,@NonNull Purchase inputPurchase) {
         mEditTextTitle.setText(inputPurchase.getTitle());
         mEditTextDesc.setText(inputPurchase.getDescription());
         mEditTextPrise.setText(String.valueOf(inputPurchase.getPrise()));
@@ -79,7 +79,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
         ((TextView)view.findViewById(R.id.text_title_add_purchase)).setText(R.string.update_card);
     }
 
-    private void findSpinnerItemPosition(String mCategory) {
+    private void findSpinnerItemPosition(@NonNull String mCategory) {
         for (int i=0; i<mSpinnerCategory.getCount(); i++){
             if (mSpinnerCategory.getItemAtPosition(i).toString().equalsIgnoreCase(mCategory)){
                 mSpinnerCategory.setSelection(i);
@@ -87,7 +87,7 @@ public class AddOrUpdatePurchaseFragment extends DialogFragment {
         }
     }
 
-    private void initViews(View root) {
+    private void initViews(@NonNull View root) {
         mEditTextTitle = root.findViewById(R.id.text_input_title_add_purchase);
         mEditTextDesc = root.findViewById(R.id.text_input_desc_add_purchase);
         mEditTextPrise = root.findViewById(R.id.text_input_prise_add_purchase);

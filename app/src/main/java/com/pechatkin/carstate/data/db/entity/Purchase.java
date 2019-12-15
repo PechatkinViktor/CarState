@@ -3,6 +3,7 @@ package com.pechatkin.carstate.data.db.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -37,8 +38,8 @@ public class Purchase implements Parcelable {
     @ColumnInfo(name = "category")
     private String mCategory;
 
-    public Purchase(String title, String description, String addPurchasesDate,
-                    float prise, String category) {
+    public Purchase(@NonNull String title,@NonNull String description,@NonNull String addPurchasesDate,
+                    float prise,@NonNull String category) {
         mTitle = title;
         mDescription = description;
         mIsHistory = false;
@@ -108,19 +109,19 @@ public class Purchase implements Parcelable {
         mIsHistory = isHistory;
     }
 
-    public void setAddHistoryDate(String addHistoryDate) {
+    public void setAddHistoryDate(@NonNull String addHistoryDate) {
         mAddHistoryDate = addHistoryDate;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         mTitle = title;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@NonNull String description) {
         mDescription = description;
     }
 
-    public void setAddPurchasesDate(String addPurchasesDate) {
+    public void setAddPurchasesDate(@NonNull String addPurchasesDate) {
         mAddPurchasesDate = addPurchasesDate;
     }
 
@@ -128,7 +129,7 @@ public class Purchase implements Parcelable {
         mPrise = prise;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(@NonNull String category) {
         mCategory = category;
     }
 
@@ -153,6 +154,7 @@ public class Purchase implements Parcelable {
                 mAddPurchasesDate, mAddHistoryDate, mPrise, mCategory);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Purchase{" +

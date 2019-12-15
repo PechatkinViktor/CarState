@@ -55,7 +55,7 @@ public class PurchasesViewModel extends ViewModel {
 
     public LiveData<Purchase> getUpdatePurchase() { return updatedPurchase; }
 
-    public void createUpdatedPurchase(Purchase oldPurchase, String newPurchaseTitle,
+    public void createUpdatedPurchase(@NonNull Purchase oldPurchase,@NonNull String newPurchaseTitle,
                                       String newPurchaseDesc, float newPurchasePrise,
                                       String newPurchaseCategory, boolean isHistory) {
         String mCurrentDate = new SimpleDateFormat(
@@ -67,12 +67,11 @@ public class PurchasesViewModel extends ViewModel {
         oldPurchase.setAddPurchasesDate(mCurrentDate);
         oldPurchase.setAddHistoryDate(mCurrentDate);
         oldPurchase.setIsHistory(isHistory);
-
-            updatedPurchase.setValue(oldPurchase);
+         updatedPurchase.setValue(oldPurchase);
     }
 
-    public void createNewPurchase(String newPurchaseTitle, String newPurchaseDesc,
-                                  float newPurchasePrise, String newPurchaseCategory) {
+    public void createNewPurchase(@NonNull String newPurchaseTitle,@NonNull String newPurchaseDesc,
+                                  float newPurchasePrise,@NonNull String newPurchaseCategory) {
         String mCurrentDate = new SimpleDateFormat(
                 DATE_FORMAT_PATTERN, Locale.getDefault()).format(new Date());
         Purchase newPurchase = new Purchase(newPurchaseTitle, newPurchaseDesc,
@@ -81,7 +80,7 @@ public class PurchasesViewModel extends ViewModel {
     }
 
     @SuppressLint("DefaultLocale")
-    public String getAllSumm(List<Purchase> purchases) {
+    public String getAllSumm(@NonNull List<Purchase> purchases) {
         float result = 0;
         for (Purchase purchase : purchases) {
             result+= purchase.getPrise();
@@ -90,7 +89,7 @@ public class PurchasesViewModel extends ViewModel {
     }
 
     @SuppressLint("DefaultLocale")
-    public String getSummByCategory(List<Purchase> purchases, String category) {
+    public String getSummByCategory(@NonNull List<Purchase> purchases,@NonNull String category) {
         float result = 0;
         for (Purchase purchase : purchases) {
             if(purchase.getCategory().equals(category)) {
@@ -100,7 +99,7 @@ public class PurchasesViewModel extends ViewModel {
         return String.format(PRISE_FORMAT, result);
     }
 
-    private List<Purchase> returnOnlyInPlanned(List<Purchase> newData) {
+    private List<Purchase> returnOnlyInPlanned(@NonNull List<Purchase> newData) {
         List<Purchase> purchasesInPlanned = new ArrayList<>();
 
         for (Purchase purchase : newData) {
@@ -111,7 +110,7 @@ public class PurchasesViewModel extends ViewModel {
         return purchasesInPlanned;
     }
 
-    private List<Purchase> returnOnlyInHistory(List<Purchase> newData) {
+    private List<Purchase> returnOnlyInHistory(@NonNull List<Purchase> newData) {
         List<Purchase> purchasesInHistory = new ArrayList<>();
 
         for (Purchase purchase : newData) {

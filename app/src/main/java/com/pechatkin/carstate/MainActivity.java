@@ -18,19 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setUpPrefs();
         setUpNavigation();
+        setUpPrefs();
     }
 
     private void setUpPrefs() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
     }
 
     private void setUpNavigation() {
 
         BottomNavigationView mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
         AppBarConfiguration mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_purchases, R.id.navigation_history, R.id.navigation_settings)
+                R.id.navigation_purchases, R.id.navigation_history, R.id.navigation_settings,
+                R.id.history_summary_fragment, R.id.planned_summary_fragment)
                 .build();
         NavController mNavController =
                 Navigation.findNavController(this, R.id.nav_host_fragment);

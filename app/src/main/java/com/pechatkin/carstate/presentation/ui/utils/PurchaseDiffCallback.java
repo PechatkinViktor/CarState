@@ -1,5 +1,6 @@
 package com.pechatkin.carstate.presentation.ui.utils;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.pechatkin.carstate.data.db.entity.Purchase;
@@ -11,7 +12,7 @@ public class PurchaseDiffCallback extends DiffUtil.Callback {
     private List<Purchase> mOldPurchase;
     private List<Purchase> mNewPurchase;
 
-    public PurchaseDiffCallback(List<Purchase> oldPurchase, List<Purchase> newPurchase) {
+    public PurchaseDiffCallback(@NonNull List<Purchase> oldPurchase,@NonNull List<Purchase> newPurchase) {
         mOldPurchase = oldPurchase;
         mNewPurchase = newPurchase;
     }

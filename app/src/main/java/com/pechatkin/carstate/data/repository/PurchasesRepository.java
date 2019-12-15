@@ -48,7 +48,7 @@ public class PurchasesRepository {
 
         private PurchaseDao mPurchaseDao;
 
-        private InsertPurchaseAsyncTask(PurchaseDao purchaseDao) {
+        private InsertPurchaseAsyncTask(@NonNull PurchaseDao purchaseDao) {
             mPurchaseDao = purchaseDao;
         }
         @Override
@@ -62,7 +62,7 @@ public class PurchasesRepository {
 
         private PurchaseDao mPurchaseDao;
 
-        private UpdatePurchaseAsyncTask(PurchaseDao purchaseDao) {
+        private UpdatePurchaseAsyncTask(@NonNull PurchaseDao purchaseDao) {
             mPurchaseDao = purchaseDao;
         }
         @Override
@@ -76,7 +76,7 @@ public class PurchasesRepository {
 
         private PurchaseDao mPurchaseDao;
 
-        private DeletePurchaseAsyncTask(PurchaseDao purchaseDao) {
+        private DeletePurchaseAsyncTask(@NonNull PurchaseDao purchaseDao) {
             mPurchaseDao = purchaseDao;
         }
         @Override
@@ -90,7 +90,7 @@ public class PurchasesRepository {
 
         private PurchaseDao mPurchaseDao;
 
-        private DeleteAllPurchaseAsyncTask(PurchaseDao purchaseDao) {
+        private DeleteAllPurchaseAsyncTask(@NonNull PurchaseDao purchaseDao) {
             mPurchaseDao = purchaseDao;
         }
         @Override
