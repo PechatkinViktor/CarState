@@ -15,10 +15,9 @@ import com.pechatkin.carstate.R;
 import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModel;
 import com.pechatkin.carstate.presentation.viewmodel.PurchasesViewModelFactory;
 
-public class PlannedSummaryFragment extends Fragment{
+public class SummaryHistoryFragment extends Fragment {
 
     private PurchasesViewModel mPurchasesViewModel;
-
     private TextView mPrise;
     private TextView mAutoParts;
     private TextView mConsum;
@@ -30,7 +29,7 @@ public class PlannedSummaryFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_summary_planned, container, false);
+        return inflater.inflate(R.layout.fragment_summary_history, container, false);
     }
 
     @Override
@@ -39,23 +38,17 @@ public class PlannedSummaryFragment extends Fragment{
 
         initViews(view);
         setupMvvm();
-    }
-
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
     }
 
     private void initViews(@NonNull View view) {
-        mPrise = view.findViewById(R.id.summary_planned_prise);
-        mAutoParts = view.findViewById(R.id.summary_planned_auto_parts);
-        mConsum = view.findViewById(R.id.summary_planned_consum);
-        mTools = view.findViewById(R.id.summary_planned_tools);
-        mAccessories = view.findViewById(R.id.summary_planned_accessories);
-        mDiscTires = view.findViewById(R.id.summary_planned_disc_tires);
-        mPOther = view.findViewById(R.id.summary_planned_other);
+        mPrise = view.findViewById(R.id.summary_history_prise);
+        mAutoParts = view.findViewById(R.id.summary_history_auto_parts);
+        mConsum = view.findViewById(R.id.summary_history_consum);
+        mTools = view.findViewById(R.id.summary_history_tools);
+        mAccessories = view.findViewById(R.id.summary_history_accessories);
+        mDiscTires = view.findViewById(R.id.summary_history_disc_tires);
+        mPOther = view.findViewById(R.id.summary_history_other);
     }
 
     private void setupMvvm() {
@@ -64,7 +57,7 @@ public class PlannedSummaryFragment extends Fragment{
                     .of(getActivity(), new PurchasesViewModelFactory(getActivity()))
                     .get(PurchasesViewModel.class);
         }
-        mPurchasesViewModel.getAllPurchasesInPlanned().observe(this, purchases -> {
+        mPurchasesViewModel.getAllPurchasesInHistory().observe(this, purchases -> {
             mPrise.setText(mPurchasesViewModel.getAllSumm(purchases));
             mAutoParts.setText(mPurchasesViewModel.getSummByCategory(
                     purchases, getString(R.string.auto_parts)));
@@ -80,4 +73,6 @@ public class PlannedSummaryFragment extends Fragment{
                     purchases, getString(R.string.other)));
         });
     }
+
+
 }

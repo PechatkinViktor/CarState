@@ -12,7 +12,8 @@
         >
         <action
             android:id="@+id/action_navigation_history_to_plannedSummaryFragment"
-            app:destination="@id/plannedSummaryFragment" />
+            app:destination="@id/plannedSummaryFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_navigation_history_to_historySummaryFragment"
             app:destination="@id/historySummaryFragment" />
@@ -23,7 +24,8 @@
         android:label="@string/purchases" >
         <action
             android:id="@+id/action_navigation_purchases_to_plannedSummaryFragment"
-            app:destination="@id/plannedSummaryFragment" />
+            app:destination="@id/plannedSummaryFragment"
+            />
         <action
             android:id="@+id/action_navigation_purchases_to_historySummaryFragment"
             app:destination="@id/historySummaryFragment" />
@@ -40,6 +42,6 @@
         android:label="@string/all_planned_summary" />
     <fragment
         android:id="@+id/historySummaryFragment"
-        android:name="com.pechatkin.carstate.presentation.ui.summary.HistorySummaryFragment"
+        android:name="com.pechatkin.carstate.presentation.ui.summary.SummaryHistoryFragment"
         android:label="@string/all_history_summary" />
 </navigation>

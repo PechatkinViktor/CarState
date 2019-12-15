@@ -1,5 +1,7 @@
 package com.pechatkin.carstate.presentation.viewmodel;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.pechatkin.carstate.presentation.ui.utils.Const.DATE_FORMAT_PATTERN;
+import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
 import static com.pechatkin.carstate.presentation.ui.utils.Const.STATE_IS_HISTORY;
 
 public class PurchasesViewModel extends ViewModel {
@@ -78,6 +81,26 @@ public class PurchasesViewModel extends ViewModel {
         Purchase newPurchase = new Purchase(newPurchaseTitle, newPurchaseDesc,
                 mCurrentDate, newPurchasePrise, newPurchaseCategory);
         this.insert(newPurchase);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public String getAllSumm(List<Purchase> purchases) {
+        float result = 0;
+        for (Purchase purchase : purchases) {
+            result+= purchase.getPrise();
+        }
+        return String.format(PRISE_FORMAT, result);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public String getSummByCategory(List<Purchase> purchases, String category) {
+        float result = 0;
+        for (Purchase purchase : purchases) {
+            if(purchase.getCategory().equals(category)) {
+                result+= purchase.getPrise();
+            }
+        }
+        return String.format(PRISE_FORMAT, result);
     }
 
     private List<Purchase> returnOnlyInPlanned(List<Purchase> newData) {

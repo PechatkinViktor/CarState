@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpNavigation() {
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+        BottomNavigationView mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        AppBarConfiguration mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_purchases, R.id.navigation_history, R.id.navigation_settings)
                 .build();
-        NavController navController =
+        NavController mNavController =
                 Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this,
-                navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+                mNavController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(mBottomNavigationView, mNavController);
 
     }
 }
