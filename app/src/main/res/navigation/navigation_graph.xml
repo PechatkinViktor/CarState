@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
     app:startDestination="@+id/navigation_purchases">
 
@@ -30,13 +31,19 @@
             android:id="@+id/action_navigation_purchases_to_historySummaryFragment"
             app:destination="@id/history_summary_fragment"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_navigation_purchases_to_firstOpenTutorialFragment"
+            app:destination="@id/firstOpenTutorialFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.pechatkin.carstate.presentation.ui.settings.SettingsFragment"
-        android:label="@string/app_settings" />
-    <fragment android:id="@+id/placeholder" />
+        android:label="@string/app_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_firstOpenTutorialFragment"
+            app:destination="@id/firstOpenTutorialFragment" />
+    </fragment>
     <fragment
         android:id="@+id/planned_summary_fragment"
         android:name="com.pechatkin.carstate.presentation.ui.summary.PlannedSummaryFragment"
@@ -45,4 +52,13 @@
         android:id="@+id/history_summary_fragment"
         android:name="com.pechatkin.carstate.presentation.ui.summary.SummaryHistoryFragment"
         android:label="@string/all_history_summary" />
+    <fragment
+        android:id="@+id/firstOpenTutorialFragment"
+        android:name="com.pechatkin.carstate.presentation.ui.tutorial.FirstOpenTutorialFragment"
+        android:label="@string/first_start"
+        tools:layout="@layout/fragment_first_open_tutorial" >
+        <action
+            android:id="@+id/action_firstOpenTutorialFragment_to_navigation_purchases"
+            app:destination="@id/navigation_purchases" />
+    </fragment>
 </navigation>

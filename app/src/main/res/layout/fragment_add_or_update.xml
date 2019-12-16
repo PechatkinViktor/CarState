@@ -54,12 +54,12 @@
         android:id="@+id/button_add_purchase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:background="?colorAccent"
-        android:paddingStart="@dimen/padding_big"
-        android:paddingEnd="@dimen/padding_big"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_big"
-        android:text="@string/btn_add"/>
+        android:background="@drawable/button_border"
+        android:paddingStart="@dimen/padding_big"
+        android:paddingEnd="@dimen/padding_big"
+        android:text="@string/btn_add"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

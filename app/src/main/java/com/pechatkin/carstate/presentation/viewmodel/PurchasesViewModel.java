@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.pechatkin.carstate.data.db.entity.Purchase;
 import com.pechatkin.carstate.data.repository.PurchasesRepository;
+import com.pechatkin.carstate.data.tutorial.TutorialDataProvider;
+import com.pechatkin.carstate.domain.model.ViewPagerItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,15 +25,17 @@ import static com.pechatkin.carstate.presentation.ui.utils.Const.PRISE_FORMAT;
 public class PurchasesViewModel extends ViewModel {
 
     private PurchasesRepository mPurchasesRepository;
-
+    private TutorialDataProvider mTutorialDataProvider;
 
     private LiveData<List<Purchase>> mAllPurchasesInPlanned;
     private LiveData<List<Purchase>> mAllPurchasesInHistory;
     private final MutableLiveData<Purchase> updatedPurchase = new MutableLiveData<>();
 
-    PurchasesViewModel(@NonNull PurchasesRepository purchasesRepository) {
+    PurchasesViewModel(@NonNull PurchasesRepository purchasesRepository,
+                       TutorialDataProvider tutorialDataProvider) {
 
         mPurchasesRepository = purchasesRepository;
+        mTutorialDataProvider = tutorialDataProvider;
         LiveData<List<Purchase>> allPurchases = mPurchasesRepository.getAllPurchases();
         mAllPurchasesInPlanned = Transformations.map(allPurchases, this::returnOnlyInPlanned);
         mAllPurchasesInHistory = Transformations.map(allPurchases, this::returnOnlyInHistory);
@@ -68,6 +72,10 @@ public class PurchasesViewModel extends ViewModel {
         oldPurchase.setAddHistoryDate(mCurrentDate);
         oldPurchase.setIsHistory(isHistory);
          updatedPurchase.setValue(oldPurchase);
+    }
+
+    public List<ViewPagerItem> getDataForTutorialAdapter() {
+        return mTutorialDataProvider.getTutorialData();
     }
 
     public void createNewPurchase(@NonNull String newPurchaseTitle,@NonNull String newPurchaseDesc,

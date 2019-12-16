@@ -48,6 +48,21 @@
     <string name="all_history_summary">Все расходы из истории</string>
     <string name="app_content">Контент приложения</string>
 
+    <string name="first_start">Первый старт</string>
+    <string name="button_viewpager">Далее</string>
+    <string name="button_viewpager_get_started">Начать</string>
+    <string name="button_viewpager_go">Вперед</string>
+
+    <string name="tutorial_item_one_desc">Это приложение предназначено для прозрачного ведения
+        бюджета личного автомобиля. Планируйте будующие покупки, просматривайте историю и
+        подробные отчёты</string>
+    <string name="tutorial_item_one_title">Первые шаги</string>
+    <string name="tutorial_item_two_title">Используйте свайпы для управления списками</string>
+    <string name="tutorial_item_two_desс">Используйте свайп влево для удаления карточек,
+        свайп вправо для отправки карточки в историю и обратно</string>
+    <string name="tutorial_item_three_title">Самое время опробовать всё самостоятельно</string>
+    <string name="tutorial_item_three_desc"> </string>
+
     <string-array name="menu_spinner_category">
         <item>ПРОЧЕЕ</item>
         <item>АВТОЗАПЧАСТИ</item>
